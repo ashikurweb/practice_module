@@ -14,14 +14,15 @@
 
         .sidebar-gradient {
             background: linear-gradient(180deg, 
-                #1e3a8a 0%,
-                #1e40af 25%,
-                #2563eb 50%,
-                #3b82f6 75%,
-                #60a5fa 100%
+                #ffffff 0%,
+                #ffffff 25%,
+                #ffffff 50%,
+                #ffffff 75%,
+                #ffffff 100%
             );
             backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 2px solid #e2e8f0;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
         }
 
         .menu-item {
@@ -53,16 +54,16 @@
         }
 
         .active-menu {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            border-left: 4px solid #fbbf24;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-left: 4px solid #3b82f6;
             box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                0 4px 20px rgba(59, 130, 246, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
             transform: translateX(2px);
         }
 
         .active-menu i {
-            color: #fbbf24;
+            color: #3b82f6;
             transform: scale(1.1);
         }
 
@@ -98,11 +99,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-area {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo-icon {
@@ -207,13 +203,13 @@
          :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
          
         <!-- Logo Area -->
-        <div class="flex items-center justify-center h-16 px-4 logo-area">
+        <div class="flex items-center justify-center h-16 px-4 border-b border-slate-200">
             <div class="flex items-center space-x-3">
                 <div class="w-8 h-8 logo-icon rounded-lg flex items-center justify-center relative">
-                    <i class="fas fa-cube text-white text-lg"></i>
+                    <i class="fas fa-cube text-slate-900 text-lg"></i>
                     <div class="notification-badge"></div>
                 </div>
-                <span class="text-xl font-bold text-white tracking-wide">Dashboard</span>
+                <span class="text-xl font-bold text-slate-900 tracking-wide">Dashboard</span>
             </div>
         </div>
 
@@ -221,7 +217,7 @@
         <nav class="mt-8 px-4 space-y-2">
             <!-- Dashboard -->
             <a href="#" @click="activeMenu = 'dashboard'" 
-               class="menu-item flex items-center px-4 py-3 text-white rounded-xl"
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
                :class="activeMenu === 'dashboard' ? 'active-menu' : ''">
                 <i class="fas fa-tachometer-alt w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Dashboard</span>
@@ -230,7 +226,7 @@
             <!-- Analytics with Dropdown -->
             <div x-data="{ open: false }">
                 <button @click="open = !open; openSubmenu = open ? 'analytics' : null; activeMenu = 'analytics'" 
-                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-white rounded-xl"
+                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl"
                         :class="activeMenu === 'analytics' ? 'active-menu' : ''">
                     <div class="flex items-center">
                         <i class="fas fa-chart-line w-5 text-center mr-3 transition-transform duration-300"></i>
@@ -248,15 +244,15 @@
                      x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                      x-transition:leave-end="opacity-0 transform scale-95 translate-y-2"
                      class="ml-4 mt-2 space-y-1">
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Reports</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Insights</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Real-time Data</span>
                     </a>
@@ -265,7 +261,7 @@
 
             <!-- Users -->
             <a href="#" @click="activeMenu = 'users'" 
-               class="menu-item flex items-center px-4 py-3 text-white rounded-xl relative"
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl relative"
                :class="activeMenu === 'users' ? 'active-menu' : ''">
                 <i class="fas fa-users w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Users</span>
@@ -275,7 +271,7 @@
             <!-- Products with Dropdown -->
             <div x-data="{ open: false }">
                 <button @click="open = !open; openSubmenu = open ? 'products' : null; activeMenu = 'products'" 
-                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-white rounded-xl"
+                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl"
                         :class="activeMenu === 'products' ? 'active-menu' : ''">
                     <div class="flex items-center">
                         <i class="fas fa-box w-5 text-center mr-3 transition-transform duration-300"></i>
@@ -293,19 +289,19 @@
                      x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                      x-transition:leave-end="opacity-0 transform scale-95 translate-y-2"
                      class="ml-4 mt-2 space-y-1">
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">All Products</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Categories</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Inventory</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-white rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Stock Alerts</span>
                     </a>
@@ -314,7 +310,7 @@
 
             <!-- Orders -->
             <a href="#" @click="activeMenu = 'orders'" 
-               class="menu-item flex items-center px-4 py-3 text-white rounded-xl"
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
                :class="activeMenu === 'orders' ? 'active-menu' : ''">
                 <i class="fas fa-shopping-cart w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Orders</span>
@@ -323,7 +319,7 @@
 
             <!-- Messages -->
             <a href="#" @click="activeMenu = 'messages'" 
-               class="menu-item flex items-center px-4 py-3 text-white rounded-xl"
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
                :class="activeMenu === 'messages' ? 'active-menu' : ''">
                 <i class="fas fa-envelope w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Messages</span>
@@ -332,26 +328,11 @@
 
             <!-- Settings -->
             <a href="#" @click="activeMenu = 'settings'" 
-               class="menu-item flex items-center px-4 py-3 text-white rounded-xl"
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
                :class="activeMenu === 'settings' ? 'active-menu' : ''">
                 <i class="fas fa-cog w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Settings</span>
             </a>
         </nav>
-
-        <!-- User Profile in Sidebar -->
-        <div class="absolute bottom-0 left-0 right-0 p-4">
-            <div class="user-profile rounded-xl p-4 cursor-pointer">
-                <div class="flex items-center space-x-3">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="text-white">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 

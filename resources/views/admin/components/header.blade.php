@@ -8,13 +8,13 @@
             </button>
             
             <!-- Search Bar -->
-            <div class="hidden md:flex relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
+            <div class="hidden md:flex relative group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200"></i>
                 </div>
                 <input type="text" 
                        placeholder="Search anything..." 
-                       class="pl-10 pr-4 py-2 w-80 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200">
+                       class="pl-12 pr-4 py-3 w-80 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 focus:outline-none transition-all duration-300 bg-gray-50 focus:bg-white shadow-sm hover:shadow-md">
             </div>
         </div>
 
