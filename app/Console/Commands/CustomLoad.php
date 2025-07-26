@@ -48,7 +48,7 @@ class CustomLoad extends Command
     {
         $appKey = config('app.key');
 
-        if (empty($appKey) || $appKey === 'base64:') {
+        if (empty($appKey)) {
             $this->info('Generating application key...');
             
             try {
