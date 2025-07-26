@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
@@ -19,3 +20,6 @@ Route::controller(RegisterUserController::class)->group(function () {
     Route::post('/register', 'store')->name('register.store');
 });
 
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin', 'index')->name('admin.index');
+});
