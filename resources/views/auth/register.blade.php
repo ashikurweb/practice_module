@@ -59,7 +59,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                         </div>
-                        <input id="name" name="name" type="text" 
+                        <input id="name" name="name" type="text" value="{{ old('name') }}" 
                                class="input-focus w-full pl-10 pr-4 py-3 border {{ $errors->has('name') ? 'border-red-500' : 'border-gray-200' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90"
                                placeholder="Enter your full name">
                     </div>
@@ -77,7 +77,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
                             </svg>
                         </div>
-                        <input id="email" name="email" type="email" 
+                        <input id="email" name="email" type="email" value="{{ old('email') }}" 
                                class="input-focus w-full pl-10 pr-4 py-3 border {{ $errors->has('email') ? 'border-red-500' : 'border-gray-200' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90"
                                placeholder="Enter your email">
                     </div>
@@ -95,7 +95,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
                         </div>
-                        <input id="password" name="password" type="password" 
+                        <input id="password" name="password" type="password" value="{{ old('password') }}" 
                                class="input-focus w-full pl-10 pr-12 py-3 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-200' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90"
                                placeholder="Create a password">
                         
@@ -122,7 +122,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
                         </div>
-                        <input id="password_confirmation" name="password_confirmation" type="password" 
+                        <input id="password_confirmation" value="{{ old('password_confirmation') }}" name="password_confirmation" type="password" 
                                class="input-focus w-full pl-10 pr-12 py-3 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-200' }} rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90"
                                placeholder="Confirm your password">
                         

@@ -15,7 +15,6 @@
             box-shadow: 0 10px 25px rgba(99, 102, 241, 0.15);
         }
         
-        
         .floating-animation {
             animation: float 6s ease-in-out infinite;
         }
@@ -33,6 +32,17 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .input-error {
+            border-color: #dc2626 !important;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+        }
     </style>
 
     <div class="min-h-screen flex items-center justify-center p-4">
@@ -48,7 +58,9 @@
             </div>
 
             <!-- Login Form -->
-            <form class="space-y-5" action="#" method="POST">
+            <form class="space-y-5" action="{{ route('login.store') }}" method="POST">
+                @csrf
+                
                 <!-- Email Field -->
                 <div class="space-y-2">
                     <label for="email" class="text-sm font-medium text-gray-700">Email</label>
@@ -58,10 +70,14 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
                             </svg>
                         </div>
-                        <input id="email" name="email" type="email" required 
-                               class="input-focus w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90"
+                        <input id="email" name="email" type="email" 
+                               value="{{ old('email') }}"
+                               class="input-focus w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90 @error('email') input-error @enderror"
                                placeholder="Enter your email">
                     </div>
+                    @error('email')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Password Field -->
@@ -73,8 +89,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                             </svg>
                         </div>
-                        <input id="password" name="password" type="password" required 
-                               class="input-focus w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90"
+                        <input id="password" name="password" type="password" 
+                               class="input-focus w-full pl-10 pr-12 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/90 @error('password') input-error @enderror"
                                placeholder="Enter your password">
                         
                         <!-- Password Toggle Button -->
@@ -86,12 +102,16 @@
                             </svg>
                         </button>
                     </div>
+                    @error('password')
+                        <p class="error-message">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Remember Me & Forgot Password -->
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <input id="remember" name="remember" type="checkbox" 
+                               {{ old('remember') ? 'checked' : '' }}
                                class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
                         <label for="remember" class="ml-2 text-sm text-gray-600">
                             Remember me
