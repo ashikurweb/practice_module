@@ -325,11 +325,11 @@
                 <span class="font-medium">Messages</span>
                 <span class="ml-auto bg-yellow-500 text-xs px-2 py-1 rounded-full">5</span>
             </a>
-
-            <a href="#" @click="activeMenu = 'profile'" 
+            
+            <a href="{{ route('profile.index') }}" @click="activeMenu = 'profile'" 
                class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
                :class="activeMenu === 'profile' ? 'active-menu' : ''">
-                <i class="fas fa-user w-5 text-center mr-3 transition-transform duration-300"></i>
+                <i class="fas fa-envelope w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Profile</span>
             </a>
 

@@ -82,7 +82,8 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans antialiased">
+    <x-notification />
     <!-- Sidebar Overlay for Mobile -->
     <div x-show="sidebarOpen" 
          x-transition:enter="transition-opacity ease-linear duration-300"

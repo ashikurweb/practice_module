@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
 
@@ -22,4 +23,10 @@ Route::controller(RegisterUserController::class)->group(function () {
 
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index')->name('admin.index');
+});
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'index')->name('profile.index');
+    Route::post('/profile/update', 'updateProfile')->name('profile.update');
+    Route::post('/profile/password', 'updatePassword')->name('profile.password');
 });

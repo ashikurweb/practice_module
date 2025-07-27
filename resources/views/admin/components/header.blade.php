@@ -40,8 +40,8 @@
                     <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
                          alt="Profile" class="w-10 h-10 rounded-full ring-2 ring-primary-200">
                     <div class="hidden md:block text-left">
-                        <p class="text-sm font-semibold text-gray-900">John Doe</p>
-                        <p class="text-xs text-gray-500">Administrator</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->name }}</p>
+                        <p class="text-xs text-gray-500">{{ Auth::user()->email }}</p>
                     </div>
                     <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"
                        :class="open ? 'rotate-180' : ''"></i>
@@ -58,12 +58,7 @@
                      x-transition:leave-end="opacity-0 transform scale-95"
                      class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
                     
-                    <div class="px-4 py-3 border-b border-gray-100">
-                        <p class="text-sm font-semibold text-gray-900">John Doe</p>
-                        <p class="text-sm text-gray-500">john.doe@example.com</p>
-                    </div>
-                    
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                    <a href="{{ route('profile.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
                         <i class="fas fa-user-circle mr-3 text-gray-400"></i>
                         <span>My Profile</span>
                     </a>
