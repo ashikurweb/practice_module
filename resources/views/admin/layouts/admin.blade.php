@@ -77,12 +77,12 @@
         }
         
         .active-menu {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(235, 6, 6, 0.15);
             border-left: 4px solid #60a5fa;
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans antialiased">
+<body>
     <!-- Sidebar Overlay for Mobile -->
     <div x-show="sidebarOpen" 
          x-transition:enter="transition-opacity ease-linear duration-300"

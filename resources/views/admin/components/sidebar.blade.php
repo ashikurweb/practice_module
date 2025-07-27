@@ -244,15 +244,15 @@
                      x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                      x-transition:leave-end="opacity-0 transform scale-95 translate-y-2"
                      class="ml-4 mt-2 space-y-1">
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Reports</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Insights</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Real-time Data</span>
                     </a>
@@ -289,19 +289,19 @@
                      x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                      x-transition:leave-end="opacity-0 transform scale-95 translate-y-2"
                      class="ml-4 mt-2 space-y-1">
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">All Products</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Categories</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Inventory</span>
                     </a>
-                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-blue-100 hover:text-slate-900 rounded-lg transition-all duration-300">
+                    <a href="#" class="submenu-item flex items-center px-4 py-2 text-gray-600 hover:text-slate-900 rounded-lg transition-all duration-300">
                         <i class="fas fa-circle text-xs mr-3 opacity-60"></i>
                         <span class="text-sm font-medium">Stock Alerts</span>
                     </a>
@@ -324,6 +324,13 @@
                 <i class="fas fa-envelope w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Messages</span>
                 <span class="ml-auto bg-yellow-500 text-xs px-2 py-1 rounded-full">5</span>
+            </a>
+
+            <a href="#" @click="activeMenu = 'profile'" 
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
+               :class="activeMenu === 'profile' ? 'active-menu' : ''">
+                <i class="fas fa-user w-5 text-center mr-3 transition-transform duration-300"></i>
+                <span class="font-medium">Profile</span>
             </a>
 
             <!-- Settings -->
