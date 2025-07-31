@@ -1,8 +1,9 @@
-<header class="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-30">
+<header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
     <div class="flex items-center justify-between px-4 py-4">
         <!-- Mobile Menu Button & Search -->
         <div class="flex items-center space-x-4">
             <button @click="sidebarOpen = !sidebarOpen" 
+                    data-mobile-menu
                     class="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 hover-glow transition-all duration-200">
                 <i class="fas fa-bars text-xl"></i>
             </button>
@@ -21,11 +22,60 @@
         <!-- Right Side Items -->
         <div class="flex items-center space-x-4">
             <!-- Notifications -->
-            <div class="relative">
-                <button class="p-2 text-gray-600 hover:bg-gray-100 rounded-xl hover-glow transition-all duration-200 relative">
+            <div class="relative" x-data="{ open: false }">
+                <button @click="open = !open" 
+                        class="p-2 text-gray-600 hover:bg-gray-100 rounded-xl hover-glow transition-all duration-200 relative">
                     <i class="fas fa-bell text-xl"></i>
                     <span class="absolute -top-1 -right-1 h-5 w-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center animate-bounce-subtle">3</span>
                 </button>
+                
+                <!-- Notifications Dropdown -->
+                <div x-show="open" 
+                     @click.away="open = false"
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 transform scale-95"
+                     x-transition:enter-end="opacity-100 transform scale-100"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 transform scale-100"
+                     x-transition:leave-end="opacity-0 transform scale-95"
+                     class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
+                    
+                    <div class="px-4 py-2 border-b border-gray-100">
+                        <h3 class="text-sm font-semibold text-gray-900">Notifications</h3>
+                    </div>
+                    
+                    <div class="max-h-64 overflow-y-auto">
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                            <div>
+                                <p class="text-sm font-medium">New order received</p>
+                                <p class="text-xs text-gray-500">2 minutes ago</p>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                            <div>
+                                <p class="text-sm font-medium">Payment successful</p>
+                                <p class="text-xs text-gray-500">5 minutes ago</p>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
+                            <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                            <div>
+                                <p class="text-sm font-medium">Low stock alert</p>
+                                <p class="text-xs text-gray-500">10 minutes ago</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="border-t border-gray-100 mt-2 pt-2">
+                        <a href="#" class="flex items-center px-4 py-3 text-blue-600 hover:bg-blue-50 transition-colors">
+                            <span class="text-sm font-medium">View all notifications</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- Messages -->
@@ -74,10 +124,13 @@
                     </a>
                     
                     <div class="border-t border-gray-100 mt-2 pt-2">
-                        <a href="#" class="flex items-center px-4 py-3 text-red-600 hover:bg-red-50 transition-colors">
-                            <i class="fas fa-sign-out-alt mr-3"></i>
-                            <span>Sign Out</span>
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 transition-colors">
+                                <i class="fas fa-sign-out-alt mr-3"></i>
+                                <span>Sign Out</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

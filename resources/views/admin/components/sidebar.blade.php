@@ -200,7 +200,8 @@
 
     <!-- Sidebar -->
     <div class="fixed top-0 left-0 z-50 w-64 h-full sidebar-gradient shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 sidebar overflow-y-auto"
-         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+         data-sidebar>
          
         <!-- Logo Area -->
         <div class="flex items-center justify-center h-16 px-4 border-b border-slate-200">
@@ -216,18 +217,16 @@
         <!-- Navigation Menu -->
         <nav class="mt-8 px-4 space-y-2">
             <!-- Dashboard -->
-            <a href="#" @click="activeMenu = 'dashboard'" 
-               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
-               :class="activeMenu === 'dashboard' ? 'active-menu' : ''">
+            <a href="{{ route('admin.index') }}" 
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl {{ request()->routeIs('admin.index') ? 'active-menu' : '' }}">
                 <i class="fas fa-tachometer-alt w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Dashboard</span>
             </a>
 
             <!-- Analytics with Dropdown -->
             <div x-data="{ open: false }">
-                <button @click="open = !open; openSubmenu = open ? 'analytics' : null; activeMenu = 'analytics'" 
-                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl"
-                        :class="activeMenu === 'analytics' ? 'active-menu' : ''">
+                <button @click="open = !open" 
+                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl">
                     <div class="flex items-center">
                         <i class="fas fa-chart-line w-5 text-center mr-3 transition-transform duration-300"></i>
                         <span class="font-medium">Analytics</span>
@@ -260,9 +259,7 @@
             </div>
 
             <!-- Users -->
-            <a href="#" @click="activeMenu = 'users'" 
-               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl relative"
-               :class="activeMenu === 'users' ? 'active-menu' : ''">
+            <a href="#" class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl relative">
                 <i class="fas fa-users w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Users</span>
                 <span class="ml-auto bg-red-500 text-xs px-2 py-1 rounded-full">3</span>
@@ -270,9 +267,8 @@
 
             <!-- Products with Dropdown -->
             <div x-data="{ open: false }">
-                <button @click="open = !open; openSubmenu = open ? 'products' : null; activeMenu = 'products'" 
-                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl"
-                        :class="activeMenu === 'products' ? 'active-menu' : ''">
+                <button @click="open = !open" 
+                        class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl">
                     <div class="flex items-center">
                         <i class="fas fa-box w-5 text-center mr-3 transition-transform duration-300"></i>
                         <span class="font-medium">Products</span>
@@ -309,34 +305,27 @@
             </div>
 
             <!-- Orders -->
-            <a href="#" @click="activeMenu = 'orders'" 
-               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
-               :class="activeMenu === 'orders' ? 'active-menu' : ''">
+            <a href="#" class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl">
                 <i class="fas fa-shopping-cart w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Orders</span>
                 <span class="ml-auto bg-green-500 text-xs px-2 py-1 rounded-full">12</span>
             </a>
 
             <!-- Messages -->
-            <a href="#" @click="activeMenu = 'messages'" 
-               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
-               :class="activeMenu === 'messages' ? 'active-menu' : ''">
+            <a href="#" class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl">
                 <i class="fas fa-envelope w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Messages</span>
                 <span class="ml-auto bg-yellow-500 text-xs px-2 py-1 rounded-full">5</span>
             </a>
             
-            <a href="{{ route('profile.index') }}" @click="activeMenu = 'profile'" 
-               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
-               :class="activeMenu === 'profile' ? 'active-menu' : ''">
-                <i class="fas fa-envelope w-5 text-center mr-3 transition-transform duration-300"></i>
+            <a href="{{ route('profile.index') }}" 
+               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl {{ request()->routeIs('profile.*') ? 'active-menu' : '' }}">
+                <i class="fas fa-user w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Profile</span>
             </a>
 
             <!-- Settings -->
-            <a href="#" @click="activeMenu = 'settings'" 
-               class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl"
-               :class="activeMenu === 'settings' ? 'active-menu' : ''">
+            <a href="#" class="menu-item flex items-center px-4 py-3 text-slate-900 rounded-xl">
                 <i class="fas fa-cog w-5 text-center mr-3 transition-transform duration-300"></i>
                 <span class="font-medium">Settings</span>
             </a>
