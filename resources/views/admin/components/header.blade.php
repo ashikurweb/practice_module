@@ -1,5 +1,5 @@
 <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
-    <div class="flex items-center justify-between px-4 py-4">
+    <div class="flex items-center justify-between px-4 py-2">
         <!-- Mobile Menu Button & Search -->
         <div class="flex items-center space-x-4">
             <button @click="sidebarOpen = !sidebarOpen" 
@@ -11,22 +11,25 @@
             <!-- Search Bar -->
             <div class="hidden md:flex relative group">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400 group-focus-within:text-blue-500 transition-colors duration-200"></i>
+                    <iconify-icon icon="mdi:search" class="text-gray-400 text-xl"></iconify-icon> 
                 </div>
                 <input type="text" 
-                       placeholder="Search anything..." 
-                       class="pl-12 pr-4 py-3 w-80 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 focus:outline-none transition-all duration-300 bg-gray-50 focus:bg-white shadow-sm hover:shadow-md">
+                    placeholder="Search anything..." 
+                    class="pl-12 pr-4 py-2 w-50 border outline-none border-gray-50 shadow-sm rounded-full transition-all duration-300 hover-glow">
+
             </div>
         </div>
 
         <!-- Right Side Items -->
-        <div class="flex items-center space-x-4">
-            <!-- Notifications -->
-            <div class="relative" x-data="{ open: false }" x-cloak>
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <div class="relative inline-block" x-data="{ open: false }" x-cloak>
                 <button @click="open = !open" 
-                        class="p-2 text-gray-600 hover:bg-gray-100 rounded-xl hover-glow transition-all duration-200 relative">
-                    <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute -top-1 -right-1 h-5 w-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center animate-bounce-subtle">3</span>
+                class="p-2 text-gray-600 hover-glow rounded-full h-10 w-10  border border-gray-50 shadow-sm transition-all duration-200 relative">
+                <iconify-icon icon="duo-icons:bell" class="text-2xl"></iconify-icon>
+                <span class="absolute top-0.5 right-0.5 flex h-3 w-3">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex h-3 w-3 rounded-full bg-blue-500"></span>
+                </span>
                 </button>
                 
                 <!-- Notifications Dropdown -->
@@ -38,7 +41,7 @@
                      x-transition:leave="transition ease-in duration-150"
                      x-transition:leave-start="opacity-100 transform scale-100"
                      x-transition:leave-end="opacity-0 transform scale-95"
-                     class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
+                     class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-50 py-2 z-50">
                     
                     <div class="px-4 py-2 border-b border-gray-100">
                         <h3 class="text-sm font-semibold text-gray-900">Notifications</h3>
@@ -79,7 +82,7 @@
             </div>
 
             <!-- Language Dropdown -->
-            <div class="relative shadow-sm border border-gray-100 rounded-xl" x-data="{ open: false, currentLang: 'en', languages: {
+            <div class="relative shadow-sm border border-gray-50 rounded-xl hidden sm:block" x-data="{ open: false, currentLang: 'en', languages: {
                 'en': { name: 'English', flag: '🇺🇸' },
                 'es': { name: 'Español', flag: '🇪🇸' },
                 'fr': { name: 'Français', flag: '🇫🇷' },
@@ -89,8 +92,8 @@
             class="flex items-center space-x-2 p-2 text-gray-600 hover:bg-gray-100 rounded-xl hover-glow transition-all duration-200">
                     <span x-text="languages[currentLang].flag" class="text-lg"></span>
                     <span class="text-sm font-medium">English</span>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-200"
-                    :class="open ? 'rotate-180' : ''"></i>
+                    <iconify-icon icon="mdi:chevron-down" class="text-xl text-gray-400 transition-transform duration-300"
+                    :class="open ? 'rotate-180' : ''"></iconify-icon>
                 </button>
                 
                 <!-- Language Dropdown Menu -->
@@ -102,7 +105,7 @@
                     x-transition:leave="transition ease-in duration-150"
                     x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                     x-transition:leave-end="opacity-0 transform scale-95 translate-y-1"
-                    class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50 max-h-64">
+                    class="absolute right-0 mt-2 w-48 md:w-56 bg-white rounded-xl shadow-xl border border-gray-50 py-2 z-50 max-h-64">
                     
                     <div class="px-4 py-2 border-b border-gray-100">
                         <h3 class="text-sm font-semibold text-gray-900 flex items-center">
@@ -156,25 +159,20 @@
                      class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
                     
                     <a href="{{ route('profile.index') }}" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-                        <i class="fas fa-user-circle mr-3 text-gray-400"></i>
+                        <iconify-icon icon="duo-icons:user" class="text-xl mr-2"></iconify-icon>
                         <span>My Profile</span>
                     </a>
                     
                     <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-                        <i class="fas fa-cog mr-3 text-gray-400"></i>
+                        <iconify-icon icon="duo-icons:settings" class="text-xl mr-2"></iconify-icon>
                         <span>Account Settings</span>
-                    </a>
-                    
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors">
-                        <i class="fas fa-moon mr-3 text-gray-400"></i>
-                        <span>Dark Mode</span>
                     </a>
                     
                     <div class="border-t border-gray-100 mt-2 pt-2">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 transition-colors">
-                                <i class="fas fa-sign-out-alt mr-3"></i>
+                                <i class="fas fa-sign-out-alt mr-2"></i>
                                 <span>Sign Out</span>
                             </button>
                         </form>
