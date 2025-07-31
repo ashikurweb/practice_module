@@ -199,9 +199,9 @@
          class="sidebar-overlay lg:hidden"></div>
 
     <!-- Sidebar -->
-    <div class="fixed top-0 left-0 z-50 w-64 h-full sidebar-gradient shadow-2xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 sidebar overflow-y-auto"
-         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-         data-sidebar>
+    <div class="fixed top-0 left-0 z-50 w-64 h-full sidebar-gradient shadow-2xl sidebar overflow-y-auto lg:translate-x-0"
+     :class="sidebarOpen ? 'open' : ''"
+     x-cloak>
          
         <!-- Logo Area -->
         <div class="flex items-center justify-center h-16 px-4 border-b border-slate-200">
@@ -224,7 +224,7 @@
             </a>
 
             <!-- Analytics with Dropdown -->
-            <div x-data="{ open: false }">
+            <div x-data="{ open: false }" x-cloak>
                 <button @click="open = !open" 
                         class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl">
                     <div class="flex items-center">
@@ -266,7 +266,7 @@
             </a>
 
             <!-- Products with Dropdown -->
-            <div x-data="{ open: false }">
+            <div x-data="{ open: false }" x-cloak>
                 <button @click="open = !open" 
                         class="menu-item w-full flex items-center justify-between px-4 py-3 text-slate-900 rounded-xl">
                     <div class="flex items-center">

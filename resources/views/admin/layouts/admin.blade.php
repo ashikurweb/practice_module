@@ -81,7 +81,19 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans antialiased" x-data="{ sidebarOpen: false }">
+<body class="bg-gray-50 font-sans antialiased" 
+      x-data="{ 
+          sidebarOpen: false,
+          init() {
+              this.sidebarOpen = false;
+              window.addEventListener('resize', () => {
+                  if (window.innerWidth >= 1024) {
+                      this.sidebarOpen = false;
+                  }
+              });
+          }
+      }" 
+      x-cloak>
     <x-notification />
     <!-- Sidebar Overlay for Mobile -->
     <div x-show="sidebarOpen" 
