@@ -28,10 +28,13 @@
                         <!-- Profile Image Display -->
                         <div class="flex flex-col items-center">
                             <div class="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
-                                <img id="profile-preview" src="{{ asset('storage/profile-images/' . $user->profile_image) }}" alt="Profile" class="w-full h-full object-cover {{ $user->profile_image ? '' : 'hidden' }}">
-                                <svg id="profile-default-icon" class="w-16 h-16 text-gray-400 {{ $user->profile_image ? 'hidden' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
+                                @if($user->profile_image)
+                                    <img id="profile-preview" src="{{ asset('storage/profile-images/' . $user->profile_image) }}" alt="Profile" class="w-full h-full object-cover">
+                                @else
+                                    <div id="profile-initials" class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-slate-800 text-3xl font-bold">
+                                        {{ $user->getInitials() }}
+                                    </div>
+                                @endif
                             </div>
                             <h3 class="text-lg font-semibold text-gray-900">{{ $user->name }}</h3>
                             <p class="text-sm text-gray-600">{{ $user->email }}</p>
@@ -290,7 +293,7 @@
         // Profile Image Preview Functionality
         function previewImage(input) {
             const preview = document.querySelector('#profile-preview');
-            const defaultIcon = document.querySelector('#profile-default-icon');
+            const initials = document.querySelector('#profile-initials');
             
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -299,9 +302,22 @@
                     if (preview) {
                         preview.src = e.target.result;
                         preview.classList.remove('hidden');
-                        if (defaultIcon) {
-                            defaultIcon.classList.add('hidden');
-                        }
+                    } else {
+                        // Create new image element if it doesn't exist
+                        const newPreview = document.createElement('img');
+                        newPreview.id = 'profile-preview';
+                        newPreview.src = e.target.result;
+                        newPreview.alt = 'Profile';
+                        newPreview.className = 'w-full h-full object-cover';
+                        
+                        const container = document.querySelector('.w-32.h-32');
+                        container.innerHTML = '';
+                        container.appendChild(newPreview);
+                    }
+                    
+                    // Hide initials if they exist
+                    if (initials) {
+                        initials.classList.add('hidden');
                     }
                 };
                 
