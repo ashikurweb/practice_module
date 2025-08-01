@@ -9,7 +9,7 @@
         <div class="grid lg:grid-cols-3 gap-8">
             <!-- Left Side - Profile Upload Card -->
             <div class="lg:col-span-1">
-                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white rounded-2xl shadow-[0_0_5px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden">
                     <div class="px-8 py-6 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-gray-100">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -43,7 +43,7 @@
             <!-- Right Side - Profile Information and Password Cards -->
             <div class="lg:col-span-2 space-y-8">
                 <!-- Profile Information Card -->
-                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="bg-white rounded-2xl shadow-[0_0_5px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden">
                     <div class="px-8 py-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-100">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -60,26 +60,6 @@
                     
                     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="p-8">
                         @csrf
-
-                        <!-- Profile Image Upload Field -->
-                        <div class="mb-6">
-                            <label for="profile_image" class="block text-sm font-semibold text-gray-700 mb-2">Profile Image</label>
-                            <input type="file" 
-                                   id="profile_image" 
-                                   name="profile_image" 
-                                   accept="image/*"
-                                   onchange="previewImage(this)"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('profile_image') border-red-300 focus:ring-red-500 @enderror transition-all duration-200">
-                            @error('profile_image')
-                                <p class="text-red-500 text-xs mt-2 flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
                         <!-- Name Field -->
                         <div class="mb-6">
                             <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
@@ -132,10 +112,30 @@
                             @enderror
                         </div>
 
+                        <!-- Profile Image Upload Field -->
+                        <div class="mb-6">
+                            <label for="profile_image" class="block text-sm font-semibold text-gray-700 mb-2">Profile Image</label>
+                            <input type="file" 
+                                   id="profile_image" 
+                                   name="profile_image" 
+                                   accept="image/*"
+                                   onchange="previewImage(this)"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('profile_image') border-red-300 focus:ring-red-500 @enderror transition-all duration-200">
+                            @error('profile_image')
+                                <p class="text-red-500 text-xs mt-2 flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
                         <!-- Save Button -->
                         <div class="flex justify-end">
                             <button type="submit" 
                                     class="px-8 py-3 text-white hover:opacity-80 border border-blue-400 bg-blue-600 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-sm">
+                                    <i class="fa-solid fa-save mr-2"></i>
                                     Update Profile
                             </button>
                         </div>
@@ -146,7 +146,7 @@
             </div>
         </div>
         <!-- Update Password Card -->
-        <div class="bg-white rounded-2xl  max-w-6xl w-full shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+        <div class="bg-white rounded-2xl mt-5 max-w-6xl w-full shadow-[0_0_5px_rgba(0,0,0,0.1)] border border-gray-100">
            <div class="px-8 py-6 bg-gradient-to-r from-green-50 to-emerald-50 border-b border-gray-100">
                <div class="flex items-center space-x-3">
                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -249,46 +249,10 @@
                    </div>
                </div>
 
-               <!-- Password Requirements -->
-               <div class="mb-8 p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
-                   <h4 class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
-                       <svg class="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                       </svg>
-                       Password Requirements:
-                   </h4>
-                   <ul class="space-y-2">
-                       <li class="flex items-center text-sm text-gray-600">
-                           <div class="w-4 h-4 mr-3 bg-green-100 rounded-full flex items-center justify-center">
-                               <svg class="w-2.5 h-2.5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                               </svg>
-                           </div>
-                           At least 8 characters long
-                       </li>
-                       <li class="flex items-center text-sm text-gray-600">
-                           <div class="w-4 h-4 mr-3 bg-green-100 rounded-full flex items-center justify-center">
-                               <svg class="w-2.5 h-2.5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                               </svg>
-                           </div>
-                           Mix of uppercase and lowercase letters
-                       </li>
-                       <li class="flex items-center text-sm text-gray-600">
-                           <div class="w-4 h-4 mr-3 bg-green-100 rounded-full flex items-center justify-center">
-                               <svg class="w-2.5 h-2.5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                               </svg>
-                           </div>
-                           Include numbers and special characters
-                       </li>
-                   </ul>
-               </div>
-
                <!-- Save Button -->
                <div class="flex justify-end">
                    <button type="submit" 
-                           class="px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                           class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200 hover:shadow-xl">
                        <span class="flex items-center">
                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
