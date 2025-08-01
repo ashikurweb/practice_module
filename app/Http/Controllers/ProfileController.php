@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\{Auth, Hash, Storage};
 use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
@@ -16,35 +16,56 @@ class ProfileController extends Controller
         return view('admin.profiles.index', compact('user'));
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(ProfileUpdateRequest $request)
     {
         $user = Auth::user();
-        
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        ]);
 
-        User::where('id', $user->id)->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        $data = $request->validated();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        if ($request->hasFile('profile_image')) {
+            $this->deleteOldImage($user->profile_image);
+            $data['profile_image'] = $this->storeImage($request->file('profile_image'));
+        }
+
+        $user->update($data);
+
+        return back()->with('success', 'Profile updated successfully!');
     }
 
     public function updatePassword(Request $request)
     {
+        $user = Auth::userOrFail();
+
         $request->validate([
-            'current_password' => 'required|current_password',
+            'current_password' => ['required', 'current_password'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
-        $user = Auth::user();
-        User::where('id', $user->id)->update([
+        $user->update([
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->back()->with('success', 'Password updated successfully!');
+        return back()->with('success', 'Password updated successfully!');
+    }
+
+    public static function getProfileImageUrl(User $user): string
+    {
+        return $user->profile_image && Storage::disk('public')->exists("profile-images/{$user->profile_image}")
+            ? asset("storage/profile-images/{$user->profile_image}")
+            : asset('images/default-avatar.png');
+    }
+
+    private function deleteOldImage(?string $imageName): void
+    {
+        if ($imageName && Storage::disk('public')->exists("profile-images/{$imageName}")) {
+            Storage::disk('public')->delete("profile-images/{$imageName}");
+        }
+    }
+
+    private function storeImage($image): string
+    {
+        $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('profile-images', $imageName, 'public');
+        return $imageName;
     }
 }

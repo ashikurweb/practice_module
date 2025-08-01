@@ -137,11 +137,11 @@
             <div class="relative" x-data="{ open: false }" x-cloak>
                 <button @click="open = !open" 
                         class="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-100 transition-all duration-200 hover-glow">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
-                         alt="Profile" class="w-10 h-10 rounded-full ring-2 ring-primary-200">
+                    <img src="{{ asset('storage/profile-images/' . Auth::user()->profile_image) }}" 
+                         alt="Profile" class="w-10 h-10 object-cover rounded-full ring-2 ring-primary-200">
                     <div class="hidden md:block text-left">
-                        <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->name }}</p>
-                        <p class="text-xs text-gray-500">{{ Auth::user()->email }}</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ Auth::user() ? Auth::user()->name : 'Guest' }}</p>
+                        <p class="text-xs text-gray-500">{{ Auth::user() ? Auth::user()->email : 'guest@example.com' }}</p>
                     </div>
                     <i class="fas fa-chevron-down text-gray-400 transition-transform duration-200"
                        :class="open ? 'rotate-180' : ''"></i>
