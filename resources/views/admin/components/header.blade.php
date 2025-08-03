@@ -138,7 +138,7 @@
                 <button @click="open = !open" 
                         class="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-100 transition-all duration-200 hover-glow">
                     @if(Auth::user()->profile_image)
-                        <img src="{{ asset('storage/profile-images/' . Auth::user()->profile_image) }}" 
+                        <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
                              alt="Profile" class="w-10 h-10 object-cover rounded-full ring-2 ring-primary-200">
                     @else
                         <div class="w-10 h-10 bg-slate-200 rounded-full ring-2 ring-primary-200 flex items-center justify-center text-slate-800 text-sm font-bold">
