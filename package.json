@@ -16,5 +16,12 @@
     },
     "dependencies": {
         "alpinejs": "^3.14.9"
-    }
+    },
+    "tailwind": {
+    "content": [
+      "./resources/views/**/*.blade.php",
+      "./resources/js/**/*.vue",
+      "./resources/js/**/*.js"
+    ]
+  }
 }

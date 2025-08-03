@@ -3,8 +3,8 @@
     <main class="flex-1 p-6 bg-gray-50">
         <!-- Page Title -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Dashboard Overview</h1>
-            <p class="text-gray-600">Welcome back! Here's what's happening with your business today.</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ __('Dashboard Overview') }}</h1>
+            <p class="text-gray-600">{{ __('Welcome back! Here\'s what\'s happening with your business today.') }}</p>
         </div>
 
         <!-- Stats Cards -->
@@ -12,7 +12,7 @@
             <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-600">Total Users</p>
+                        <p class="text-sm font-medium text-gray-600">{{ __('Total Users') }}</p>
                         <p class="text-3xl font-bold text-gray-900">12,543</p>
                         <p class="text-sm text-green-600 mt-1">
                             12% increase
@@ -31,7 +31,7 @@
             <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-600">Revenue</p>
+                        <p class="text-sm font-medium text-gray-600">{{ __('Revenue') }}</p>
                         <p class="text-3xl font-bold text-gray-900">$45,678</p>
                         <p class="text-sm text-green-600 mt-1">
                             8% increase
@@ -50,7 +50,7 @@
             <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-600">Orders</p>
+                        <p class="text-sm font-medium text-gray-600">{{ __('Orders') }}</p>
                         <p class="text-3xl font-bold text-gray-900">2,847</p>
                         <p class="text-sm text-red-600 mt-1">
                             <i class="fas fa-arrow-down mr-1"></i>3% decrease
@@ -69,7 +69,7 @@
             <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-600">Conversion</p>
+                        <p class="text-sm font-medium text-gray-600">{{ __('Conversion') }}</p>
                         <p class="text-3xl font-bold text-gray-900">3.2%</p>
                         <p class="text-sm text-green-600 mt-1">
                             <i class="fas fa-arrow-up mr-1"></i>0.5% increase
@@ -89,14 +89,14 @@
         <!-- Charts Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="bg-white rounded-2xl shadow-md p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Sales Overview</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Sales Overview') }}</h3>
                 <div class="h-64 flex items-center justify-center bg-gray-50 rounded-xl">
                     <p class="text-gray-500">Chart Component Here</p>
                 </div>
             </div>
 
             <div class="bg-white rounded-2xl shadow-md p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Recent Activity') }}</h3>
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
                         <div class="w-2 h-2 bg-green-500 rounded-full"></div>

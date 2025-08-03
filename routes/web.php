@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterUserController;
-use App\Http\Controllers\SessionUserController;
-use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Controllers\SessionUserController;
+use App\Http\Controllers\RegisterUserController;
 
 // Home Route
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionUserController::class, 'index'])->name('login');
