@@ -30,20 +30,4 @@ class ProfileController extends Controller
         $user->update($data);
         return back()->with('success', 'Profile updated successfully!');
     }
-
-    public function updatePassword(Request $request)
-    {
-        $user = Auth::userOrFail();
-
-        $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-        ]);
-
-        $user->update([
-            'password' => Hash::make($request->password),
-        ]);
-
-        return back()->with('success', 'Password updated successfully!');
-    }
 }
