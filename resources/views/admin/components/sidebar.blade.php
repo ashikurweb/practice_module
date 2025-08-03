@@ -271,7 +271,7 @@
         </div>
 
         <!-- Users -->
-        <a href="#" class="menu-item flex items-center px-4 py-3 text-slate-600 rounded-xl relative">
+        <a href="{{ route('admin.users') }}" class="menu-item flex items-center px-4 py-3 text-slate-600 rounded-xl relative {{ request()->routeIs('admin.users') ? 'active-menu' : '' }}">
             <iconify-icon icon="duo-icons:user" class="text-xl mr-2"></iconify-icon>
             <span class="font-medium">Users</span>
         </a>

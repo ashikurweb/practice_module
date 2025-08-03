@@ -29,7 +29,7 @@
                         <div class="flex flex-col items-center">
                             <div class="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
                                 @if($user->profile_image)
-                                    <img id="profile-preview" src="{{ asset('storage/profile-images/' . $user->profile_image) }}" alt="Profile" class="w-full h-full object-cover">
+                                    <img id="profile-preview" src="{{ asset('storage/' . $user->profile_image) }}" alt="Profile" class="w-full h-full object-cover">
                                 @else
                                     <div id="profile-initials" class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-slate-800 text-3xl font-bold">
                                         {{ $user->getInitials() }}
