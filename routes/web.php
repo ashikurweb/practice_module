@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
         Route::get('/users', [UsersController::class, 'index'])->name('users');
     });
+
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
