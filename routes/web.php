@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\MailConfigurationController;
 
 // Home Route
 Route::get('/', function () {
@@ -35,6 +36,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+
+    // 在管理路由组中添加以下路由
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    // 其他路由...
+    
+    Route::get('/mail/configuration', [MailConfigurationController::class, 'index'])->name('mail.configuration');
+    Route::post('/mail/configuration/update', [MailConfigurationController::class, 'update'])->name('mail.configuration.update');
+});
 
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');

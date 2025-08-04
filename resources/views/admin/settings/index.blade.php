@@ -35,7 +35,7 @@
                     </div>
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Email Configuration</h3>
                     <p class="text-gray-500 text-sm mb-4">Configure email services and notification templates</p>
-                    <a href="#" class="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-800 transition-colors">
+                    <a href="{{ route('admin.mail.configuration') }}" class="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-800 transition-colors">
                         Configure settings
                         <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
