@@ -14,21 +14,6 @@
             </div>
         </div>
         
-        <!-- 消息提示 -->
-        <div class="px-8 py-4">
-            @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span class="block sm:inline">{{ session('success') }}</span>
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                    <span class="block sm:inline">{{ session('error') }}</span>
-                </div>
-            @endif
-        </div>
-        
         <form action="{{ route('admin.mail.configuration.update') }}" method="POST" enctype="multipart/form-data" class="p-8">
             @csrf
             
@@ -37,10 +22,10 @@
                 <label for="mail_mailer" class="block text-sm font-semibold text-gray-700 mb-2">MAIL MAILER *</label>
                 <input type="text" 
                         id="mail_mailer"
-                        value="{{ old('mail_mailer', $values['MAIL_MAILER']) }}"
                         name="mail_mailer"  
+                        value="{{ old('mail_mailer', $values['MAIL_MAILER']) }}"
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_mailer') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail Mailer">
+                        placeholder="e.g., smtp">
                 @error('mail_mailer')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -49,6 +34,7 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter mail driver (smtp, sendmail, mailgun, etc.)</p>
             </div>
             
             <!-- MAIL HOST * -->
@@ -59,7 +45,7 @@
                         name="mail_host" 
                         value="{{ old('mail_host', $values['MAIL_HOST']) }}"
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_host') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail Host">
+                        placeholder="e.g., smtp.gmail.com">
                 @error('mail_host')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -68,17 +54,18 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter SMTP host address</p>
             </div>
             
             <!-- MAIL PORT * -->
             <div class="mb-8">
                 <label for="mail_port" class="block text-sm font-semibold text-gray-700 mb-2">MAIL PORT *</label>
-                <input type="text" 
+                <input type="number" 
                         id="mail_port" 
                         name="mail_port"
                         value="{{ old('mail_port', $values['MAIL_PORT']) }}" 
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_port') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail Port">
+                        placeholder="e.g., 587, 465, 25">
                 @error('mail_port')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -87,6 +74,7 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter SMTP port number (1-65535)</p>
             </div>
             
             <!-- MAIL USERNAME * -->
@@ -97,7 +85,7 @@
                         name="mail_username"
                         value="{{ old('mail_username', $values['MAIL_USERNAME']) }}"
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_username') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail Username">
+                        placeholder="e.g., your-email@gmail.com">
                 @error('mail_username')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -106,6 +94,7 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter SMTP username</p>
             </div>
             
             <!-- MAIL PASSWORD * -->
@@ -116,7 +105,7 @@
                         name="mail_password" 
                         value="{{ old('mail_password', $values['MAIL_PASSWORD']) }}"
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_password') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail Password">
+                        placeholder="Enter SMTP password">
                 @error('mail_password')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -125,18 +114,18 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter SMTP password</p>
             </div>
             
             <!-- MAIL ENCRYPTION * -->
             <div class="mb-8">
                 <label for="mail_encryption" class="block text-sm font-semibold text-gray-700 mb-2">MAIL ENCRYPTION *</label>
-                <select id="mail_encryption" 
-                        name="mail_encryption"
-                        class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_encryption') border-red-300 focus:ring-red-500 @enderror transition-all duration-200">
-                    <option value="tls" {{ old('mail_encryption', $values['MAIL_ENCRYPTION']) == 'tls' ? 'selected' : '' }}>TLS</option>
-                    <option value="ssl" {{ old('mail_encryption', $values['MAIL_ENCRYPTION']) == 'ssl' ? 'selected' : '' }}>SSL</option>
-                    <option value="" {{ old('mail_encryption', $values['MAIL_ENCRYPTION']) == '' ? 'selected' : '' }}>None</option>
-                </select>
+                <input type="text" 
+                        id="mail_encryption" 
+                        name="mail_encryption" 
+                        value="{{ old('mail_encryption', $values['MAIL_ENCRYPTION']) }}"
+                        class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_encryption') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
+                        placeholder="e.g., tls, ssl">
                 @error('mail_encryption')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -145,6 +134,7 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter encryption type (tls, ssl, or leave empty)</p>
             </div>
             
             <!-- MAIL FROM ADDRESS *-->
@@ -155,7 +145,7 @@
                         name="mail_from_address" 
                         value="{{ old('mail_from_address', $values['MAIL_FROM_ADDRESS']) }}"
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_from_address') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail From Address">
+                        placeholder="e.g., noreply@yourdomain.com">
                 @error('mail_from_address')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -164,6 +154,7 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter from email address (test email will be sent here)</p>
             </div>
             
             <!-- MAIL FROM NAME *-->
@@ -174,7 +165,7 @@
                         name="mail_from_name" 
                         value="{{ old('mail_from_name', $values['MAIL_FROM_NAME']) }}"
                         class="w-full pl-4 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('mail_from_name') border-red-300 focus:ring-red-500 @enderror transition-all duration-200"
-                        placeholder="Mail From Name">
+                        placeholder="e.g., Your Application Name">
                 @error('mail_from_name')
                     <p class="text-red-500 text-xs mt-2 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -183,6 +174,7 @@
                         {{ $message }}
                     </p>
                 @enderror
+                <p class="text-xs text-gray-500 mt-1">Enter from name</p>
             </div>
             
             <!-- Save and Test Buttons -->
@@ -201,6 +193,19 @@
                     <i class="fa-solid fa-envelope mr-2"></i>
                     Test Connection
                 </button>
+            </div>
+            
+            <!-- সতর্কতা বার্তা -->
+            <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700">
+                <p class="text-sm">
+                    <strong>Important:</strong> 
+                    <ul class="list-disc pl-5 mt-2">
+                        <li>You must fill in all fields before testing the connection.</li>
+                        <li>You must save your configuration before testing the connection.</li>
+                        <li>The test email will be sent to the "MAIL FROM ADDRESS" you specified.</li>
+                        <li>Invalid credentials will result in test failure.</li>
+                    </ul>
+                </p>
             </div>
         </form>
     </div>
