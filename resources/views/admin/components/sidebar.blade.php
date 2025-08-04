@@ -336,7 +336,7 @@
         </a>
 
         <!-- Settings -->
-        <a href="#" class="menu-item flex items-center px-4 py-3 text-slate-600 rounded-xl">
+        <a href="{{ route('settings') }}" class="menu-item flex items-center px-4 py-3 text-slate-600 rounded-xl {{ request()->routeIs('settings') ? 'active-menu' : '' }}">
             <iconify-icon icon="duo-icons:settings" class="text-xl mr-2"></iconify-icon>
             <span class="font-medium">Settings</span>
         </a>
