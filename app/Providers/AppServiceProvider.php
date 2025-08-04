@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component('layouts.app', 'layouts.app');
-        Blade::component('admin.layouts.admin', 'admin.layouts.admin');
+        Blade::component('layouts.admin', 'layouts.admin');
         Blade::component('admin.components.header', 'admin.components.header');
         Blade::component('admin.components.sidebar', 'admin.components.sidebar');
     }

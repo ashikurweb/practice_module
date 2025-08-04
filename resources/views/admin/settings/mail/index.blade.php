@@ -1,4 +1,4 @@
-<x-admin.layouts.admin>
+<x-layouts.admin>
     <x-admin.breadcrumb :breadcrumbs="[
         ['label' => 'Settings', 'url' => route('settings')],
         ['label' => 'Mail Configuration']
@@ -14,7 +14,7 @@
             </div>
         </div>
         
-        <form action="{{ route('admin.mail.configuration.update') }}" method="POST" enctype="multipart/form-data" class="p-8">
+        <form action="{{ route('admin.mail.configuration.update') }}" method="POST" enctype="multipart/form-data" class="p-8" id="mailConfigForm">
             @csrf
             
             <!-- MAIL MAILER * -->
@@ -209,4 +209,31 @@
             </div>
         </form>
     </div>
-</x-admin.layouts.admin>
+
+    <!-- Script to handle form submission and reset dropdowns -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('mailConfigForm');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    // Reset all dropdown states before form submission
+                    if (typeof window.resetAllDropdowns === 'function') {
+                        window.resetAllDropdowns();
+                    }
+                });
+            }
+            
+            // Also listen for button clicks in the form
+            const buttons = document.querySelectorAll('#mailConfigForm button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Close all dropdowns when any button in the form is clicked
+                    if (typeof window.resetAllDropdowns === 'function') {
+                        window.resetAllDropdowns();
+                    }
+                });
+            });
+        });
+    </script>
+</x-layouts.admin>

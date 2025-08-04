@@ -1,4 +1,4 @@
-<x-admin.layouts.admin>
+<x-layouts.admin>
     <div class="p-4 md:p-6">
         <div class="mb-8">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Settings Dashboard</h1>
@@ -122,4 +122,4 @@
             </div>
         </div>
     </div>
-</x-admin.layouts.admin>
+</x-layouts.admin>

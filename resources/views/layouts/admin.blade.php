@@ -7,6 +7,7 @@
     <title>Modern Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script type="module">
         import heroicons from 'https://cdn.jsdelivr.net/npm/heroicons@2.2.0/+esm'
         </script>        
@@ -118,8 +119,9 @@
     <div class="lg:ml-64 flex flex-col min-h-screen">
         <!-- Header -->
         <x-admin.components.header />
-
-        {{ $slot }}
+        <main class="flex-1 container mx-auto px-4 py-8">
+            {{ $slot }}
+        </main>
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<x-admin.layouts.admin>
+<x-layouts.admin>
 <div class="p-6">
     <div class="mb-6">
         <div class="flex items-center justify-between">
@@ -134,4 +134,4 @@
         {{ $users->links() }}
     </div>
 </div>
-</x-admin.layouts.admin>
+</x-layouts.admin>
