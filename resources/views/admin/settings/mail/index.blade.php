@@ -1,5 +1,5 @@
 <x-layouts.admin>
-    <x-admin.breadcrumb :breadcrumbs="[
+    <x-breadcrumb :breadcrumbs="[
         ['label' => 'Settings', 'url' => route('settings')],
         ['label' => 'Mail Configuration']
     ]" />

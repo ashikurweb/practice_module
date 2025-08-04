@@ -13,7 +13,7 @@
         </script>        
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script>
+    {{-- <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -51,7 +51,7 @@
                 }
             }
         }
-    </script>
+    </script> --}}
     <style>
         .glass-effect {
             background: rgba(255, 255, 255, 0.1);
@@ -113,12 +113,12 @@
          class="fixed inset-0 z-40 bg-gray-600 bg-opacity-75 lg:hidden"></div>
 
     <!-- Sidebar -->
-    <x-admin.components.sidebar />
+    <x-components.sidebar />
 
     <!-- Main Content -->
     <div class="lg:ml-64 flex flex-col min-h-screen">
         <!-- Header -->
-        <x-admin.components.header />
+        <x-components.header />
         <main class="flex-1 container mx-auto px-4 py-8">
             {{ $slot }}
         </main>
