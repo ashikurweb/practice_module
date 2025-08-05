@@ -223,8 +223,8 @@
     <!-- Navigation Menu -->
     <nav class="mt-8 px-4 space-y-2">
         <!-- Dashboard -->
-        <a href="{{ route('admin.index') }}"
-            class="menu-item flex items-center px-4 py-3 text-slate-600 rounded-xl {{ request()->routeIs('admin.index') ? 'active-menu' : '' }}">
+        <a href="{{ route('admin.dashboard') }}"
+            class="menu-item flex items-center px-4 py-3 text-slate-600 rounded-xl {{ request()->routeIs('admin.dashboard') ? 'active-menu' : '' }}">
             <iconify-icon icon="duo-icons:dashboard" class="text-xl mr-2"></iconify-icon>
             <span class="font-medium">Dashboard</span>
         </a>

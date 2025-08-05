@@ -82,68 +82,68 @@
             </div>
 
             <div class="relative shadow-sm border border-gray-50 rounded-xl hidden sm:block" 
-     x-data="{ 
-         open: false, 
-         currentLang: '{{ app()->getLocale() }}', 
-         languages: {
-             'en': { name: 'English', flag: 'us.png' },
-             'es': { name: 'Español', flag: 'es.png' },
-             'fr': { name: 'Français', flag: 'fr.png' },
-             'de': { name: 'Deutsch', flag: 'de.png' },
-             'it': { name: 'Italiano', flag: 'it.png' },
-             'pt': { name: 'Português', flag: 'pt.png' },
-             'ru': { name: 'Русский', flag: 'ru.png' },
-             'cn': { name: '中文', flag: 'cn.png' },
-             'hi': { name: 'हिन्दी', flag: 'in.png' },
-             'bn': { name: 'বাংলা', flag: 'bd.png' },
-             'ar': { name: 'العربية', flag: 'sa.png' },
-         },
-         switchLanguage(code) {
-             this.currentLang = code;
-             this.open = false;
-             window.location.href = `/lang/${code}`;
-         }
-     }" 
-     x-init="currentLang = '{{ app()->getLocale() }}'"
-     x-cloak>
-     
-    <button @click="open = !open" 
-            class="flex items-center space-x-2 p-2 text-gray-600 hover:bg-gray-100 rounded-xl hover-glow transition-all duration-200">
-        <img :src="'/assets/flags/' + languages[currentLang].flag" :alt="languages[currentLang].name" class="w-6 h-4 object-cover rounded-sm">
-        <span x-text="languages[currentLang].name" class="text-sm font-medium"></span>
-        <iconify-icon icon="mdi:chevron-down" class="text-xl text-gray-400 transition-transform duration-300"
-        :class="open ? 'rotate-180' : ''"></iconify-icon>
-    </button>
-    
-    <!-- Language Dropdown Menu -->
-    <div x-show="open" x-cloak
-        @click.away="open = false"
-        x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 transform scale-95 translate-y-1"
-        x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-150"
-        x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
-        x-transition:leave-end="opacity-0 transform scale-95 translate-y-1"
-        class="absolute right-0 mt-2 w-48 md:w-56 bg-white rounded-xl shadow-xl border border-gray-50 py-2 z-50 max-w-[800px]">
-        
-        <div class="px-4 py-2 border-b border-gray-100">
-            <h3 class="text-sm font-semibold text-gray-900 flex items-center">
-                <i class="fas fa-language mr-2 text-blue-500"></i>
-                {{ __('Select Language') }}
-            </h3>
-        </div>
-        
-        <template x-for="[code, lang] in Object.entries(languages)" :key="code">
-            <button @click="switchLanguage(code)"
-                    class="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all duration-200 group"
-                    :class="currentLang === code ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-500' : ''">
-                <img :src="'/assets/flags/' + lang.flag" :alt="lang.name" class="w-6 h-4 object-cover rounded-sm mr-3 group-hover:scale-110 transition-transform duration-200">
-                <span x-text="lang.name" class="font-medium"></span>
-                <i x-show="currentLang === code" class="fas fa-check ml-auto text-blue-500"></i>
-            </button>
-        </template>
-    </div>
-</div>
+                x-data="{ 
+                    open: false, 
+                    currentLang: '{{ app()->getLocale() }}', 
+                    languages: {
+                        'en': { name: 'English', flag: 'us.png' },
+                        'es': { name: 'Español', flag: 'es.png' },
+                        'fr': { name: 'Français', flag: 'fr.png' },
+                        'de': { name: 'Deutsch', flag: 'de.png' },
+                        'it': { name: 'Italiano', flag: 'it.png' },
+                        'pt': { name: 'Português', flag: 'pt.png' },
+                        'ru': { name: 'Русский', flag: 'ru.png' },
+                        'cn': { name: '中文', flag: 'cn.png' },
+                        'hi': { name: 'हिन्दी', flag: 'in.png' },
+                        'bn': { name: 'বাংলা', flag: 'bd.png' },
+                        'ar': { name: 'العربية', flag: 'sa.png' },
+                    },
+                    switchLanguage(code) {
+                        this.currentLang = code;
+                        this.open = false;
+                        window.location.href = `/lang/${code}`;
+                    }
+                }" 
+                x-init="currentLang = '{{ app()->getLocale() }}'"
+                x-cloak>
+                
+                <button @click="open = !open" 
+                        class="flex items-center space-x-2 p-2 text-gray-600 hover:bg-gray-100 rounded-xl hover-glow transition-all duration-200">
+                    <img :src="'/assets/flags/' + languages[currentLang].flag" :alt="languages[currentLang].name" class="w-6 h-4 object-cover rounded-sm">
+                    <span x-text="languages[currentLang].name" class="text-sm font-medium"></span>
+                    <iconify-icon icon="mdi:chevron-down" class="text-xl text-gray-400 transition-transform duration-300"
+                    :class="open ? 'rotate-180' : ''"></iconify-icon>
+                </button>
+                
+                <!-- Language Dropdown Menu -->
+                <div x-show="open" x-cloak
+                    @click.away="open = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 transform scale-95 translate-y-1"
+                    x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 transform scale-95 translate-y-1"
+                    class="absolute right-0 mt-2 w-48 md:w-56 bg-white rounded-xl shadow-xl border border-gray-50 py-2 z-50 max-w-[800px]">
+                    
+                    <div class="px-4 py-2 border-b border-gray-100">
+                        <h3 class="text-sm font-semibold text-gray-900 flex items-center">
+                            <i class="fas fa-language mr-2 text-blue-500"></i>
+                            {{ __('Select Language') }}
+                        </h3>
+                    </div>
+                    
+                    <template x-for="[code, lang] in Object.entries(languages)" :key="code">
+                        <button @click="switchLanguage(code)"
+                                class="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-gray-50 transition-all duration-200 group"
+                                :class="currentLang === code ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-500' : ''">
+                            <img :src="'/assets/flags/' + lang.flag" :alt="lang.name" class="w-6 h-4 object-cover rounded-sm mr-3 group-hover:scale-110 transition-transform duration-200">
+                            <span x-text="lang.name" class="font-medium"></span>
+                            <i x-show="currentLang === code" class="fas fa-check ml-auto text-blue-500"></i>
+                        </button>
+                    </template>
+                </div>
+            </div>
 
             <!-- Profile Dropdown -->
             <div class="relative" x-data="{ open: false }" x-cloak>

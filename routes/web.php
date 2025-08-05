@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [SessionUserController::class, 'destroy'])->name('logout');
 
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/users', [UsersController::class, 'index'])->name('users');
     });
 
