@@ -1,4 +1,5 @@
 <x-layouts.app>
+{{-- <header> --}}
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between">
             <!-- Logo -->
