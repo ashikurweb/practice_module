@@ -2,7 +2,7 @@
 
 <nav class="flex items-center space-x-2 text-sm font-medium text-slate-500 mb-4">
     {{-- Home Icon --}}
-    <a href="{{ route('admin.index') }}" class="flex items-center hover:text-blue-600 transition-colors">
+    <a href="{{ route('admin.dashboard') }}" class="flex items-center hover:text-blue-600 transition-colors">
         <iconify-icon icon="heroicons:home" class="w-4 h-4"></iconify-icon>
     </a>
 
