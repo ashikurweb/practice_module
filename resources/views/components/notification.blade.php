@@ -1,6 +1,6 @@
 @if(session('success') || session('error'))
     <div id="notification" class="fixed top-3 right-5 z-50 w-full max-w-sm pointer-events-auto opacity-0 translate-y-4 transition-all duration-300 ease-out">
-        <div class="relative flex items-start gap-3 p-5 rounded-2xl shadow-md border backdrop-blur-lg bg-white/75 
+        <div class="relative flex items-start gap-3 p-5 rounded-2xl theme-shadow theme-border-primary border backdrop-blur-lg theme-bg-primary/75 
                     {{ session('success') ? 'border-green-200' : 'border-red-200' }}">
             
             <!-- Spinner / Icon -->

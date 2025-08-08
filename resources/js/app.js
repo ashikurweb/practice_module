@@ -1,5 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs'
+import './theme.js'
  
 window.Alpine = Alpine
  

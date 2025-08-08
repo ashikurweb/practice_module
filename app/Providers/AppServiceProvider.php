@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('layouts.admin', 'layouts.admin');
         Blade::component('components.header', 'components.header');
         Blade::component('components.sidebar', 'components.sidebar');
+        Blade::component('components.theme-toggle', 'components.theme-toggle');
+        Blade::component('components.notification', 'notification');
+        Blade::component('components.breadcrumb', 'breadcrumb');
     }
 }

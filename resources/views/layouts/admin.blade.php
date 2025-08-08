@@ -86,7 +86,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans antialiased" 
+<body class="theme-bg-secondary font-sans antialiased" 
       x-data="{ 
           sidebarOpen: false,
           init() {
@@ -118,7 +118,7 @@
     <div class="lg:ml-64 flex flex-col min-h-screen">
         <!-- Header -->
         <x-components.header />
-        <main class="flex-1 container mx-auto px-4 py-8">
+        <main class="flex-1 container mx-auto px-4 py-8 theme-bg-primary">
             {{ $slot }}
         </main>
     </div>

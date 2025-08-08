@@ -20,3 +20,224 @@
         transform: translateX(0) !important;
     }
 }
+
+/* Theme System - Light (Default) */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-primary: #e2e8f0;
+    --border-secondary: #f1f5f9;
+    --accent-primary: #3b82f6;
+    --accent-secondary: #60a5fa;
+    --accent-tertiary: #dbeafe;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --border-primary: #334155;
+    --border-secondary: #475569;
+    --accent-primary: #60a5fa;
+    --accent-secondary: #3b82f6;
+    --accent-tertiary: #1e40af;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Theme Utility Classes */
+.theme-bg-primary { background-color: var(--bg-primary); }
+.theme-bg-secondary { background-color: var(--bg-secondary); }
+.theme-bg-tertiary { background-color: var(--bg-tertiary); }
+.theme-text-primary { color: var(--text-primary); }
+.theme-text-secondary { color: var(--text-secondary); }
+.theme-text-muted { color: var(--text-muted); }
+.theme-border-primary { border-color: var(--border-primary); }
+.theme-border-secondary { border-color: var(--border-secondary); }
+.theme-accent-primary { color: var(--accent-primary); }
+.theme-accent-bg-primary { background-color: var(--accent-primary); }
+.theme-accent-secondary { color: var(--accent-secondary); }
+.theme-accent-bg-secondary { background-color: var(--accent-secondary); }
+.theme-accent-tertiary { background-color: var(--accent-tertiary); }
+.theme-shadow { box-shadow: var(--shadow); }
+.theme-shadow-lg { box-shadow: var(--shadow-lg); }
+
+/* Additional Theme Utilities */
+.theme-border { border-color: var(--border-primary); }
+.theme-ring { --tw-ring-color: var(--accent-primary); }
+.theme-focus:focus { outline-color: var(--accent-primary); }
+.theme-placeholder::placeholder { color: var(--text-muted); }
+
+/* Smooth Theme Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme Toggle Switch */
+.theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--bg-tertiary);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-primary);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(var(--accent-primary), 0.3);
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    transform: translateX(30px);
+    background: #fbbf24;
+}
+
+/* Theme Icons */
+.theme-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.theme-icon.sun {
+    left: 8px;
+    color: #f59e0b;
+    opacity: 1;
+}
+
+.theme-icon.moon {
+    right: 8px;
+    color: #60a5fa;
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon.sun {
+    opacity: 0;
+}
+
+[data-theme="dark"] .theme-icon.moon {
+    opacity: 1;
+}
+
+/* Hover Effects */
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(var(--accent-primary), 0.3);
+    transform: translateY(-2px);
+}
+
+/* Active Menu Styles */
+.active-menu {
+    background: linear-gradient(135deg, var(--accent-tertiary), var(--bg-secondary));
+    border-left: 4px solid var(--accent-primary);
+    box-shadow: 0 4px 20px rgba(var(--accent-primary), 0.1);
+}
+
+/* Sidebar Gradient */
+.sidebar-gradient {
+    background: linear-gradient(180deg,
+        var(--bg-primary) 0%,
+        var(--bg-primary) 25%,
+        var(--bg-primary) 50%,
+        var(--bg-primary) 75%,
+        var(--bg-primary) 100%);
+    backdrop-filter: blur(20px);
+    border-right: 2px solid var(--border-primary);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Glass Effect */
+.glass-effect {
+    background: rgba(var(--bg-primary), 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--bg-primary), 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Notification Badge */
+.notification-badge {
+    background: linear-gradient(135deg, var(--error), #dc2626);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Logo Icon */
+.logo-icon {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    box-shadow: 0 4px 15px rgba(var(--accent-primary), 0.3);
+}
+
+/* User Profile */
+.user-profile {
+    background: linear-gradient(135deg, rgba(var(--bg-primary), 0.2), rgba(var(--bg-primary), 0.05));
+    border: 1px solid rgba(var(--bg-primary), 0.1);
+}
+
+.user-profile:hover {
+    background: linear-gradient(135deg, rgba(var(--bg-primary), 0.25), rgba(var(--bg-primary), 0.1));
+}
+
+/* Menu Item Hover */
+.menu-item:hover {
+    background: rgba(var(--accent-primary), 0.1);
+    border-left: 3px solid var(--accent-primary);
+}
+
+/* Submenu Item Hover */
+.submenu-item:hover::before {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+}
+
+/* Theme Dropdown Styles */
+.theme-dropdown {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.theme-option {
+    transition: all 0.2s ease;
+}
+
+.theme-option:hover {
+    background: var(--accent-tertiary);
+    color: var(--accent-primary);
+}
+
+.theme-option.active {
+    background: var(--accent-primary);
+    color: white;
+}

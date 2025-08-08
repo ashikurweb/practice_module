@@ -1,17 +1,17 @@
 <x-layouts.admin>
     <!-- Page Title -->
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ trans('Dashboard Overview') }}</h1>
-        <p class="text-gray-600">{{ trans('Welcome back! Here\'s what\'s happening with your business today.') }}</p>
+        <h1 class="text-3xl font-bold theme-text-primary mb-2">{{ trans('Dashboard Overview') }}</h1>
+        <p class="theme-text-secondary">{{ trans('Welcome back! Here\'s what\'s happening with your business today.') }}</p>
     </div>
 
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
+        <div class="theme-bg-primary rounded-2xl theme-shadow p-6 hover-glow transition-all duration-300 theme-border-primary border">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">{{ trans('Total Users') }}</p>
-                    <p class="text-3xl font-bold text-gray-900">12,543</p>
+                    <p class="text-sm font-medium theme-text-secondary">{{ trans('Total Users') }}</p>
+                    <p class="text-3xl font-bold theme-text-primary">12,543</p>
                     <p class="text-sm text-green-600 mt-1">
                         12% increase
                     </p>
@@ -26,11 +26,11 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
+        <div class="theme-bg-primary rounded-2xl theme-shadow p-6 hover-glow transition-all duration-300 theme-border-primary border">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">{{ trans('Revenue') }}</p>
-                    <p class="text-3xl font-bold text-gray-900">$45,678</p>
+                    <p class="text-sm font-medium theme-text-secondary">{{ trans('Revenue') }}</p>
+                    <p class="text-3xl font-bold theme-text-primary">$45,678</p>
                     <p class="text-sm text-green-600 mt-1">
                         8% increase
                     </p>
@@ -45,11 +45,11 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
+        <div class="theme-bg-primary rounded-2xl theme-shadow p-6 hover-glow transition-all duration-300 theme-border-primary border">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">{{ trans('Orders') }}</p>
-                    <p class="text-3xl font-bold text-gray-900">2,847</p>
+                    <p class="text-sm font-medium theme-text-secondary">{{ trans('Orders') }}</p>
+                    <p class="text-3xl font-bold theme-text-primary">2,847</p>
                     <p class="text-sm text-red-600 mt-1">
                         <i class="fas fa-arrow-down mr-1"></i>3% decrease
                     </p>
@@ -64,11 +64,11 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-md p-6 hover-glow transition-all duration-300">
+        <div class="theme-bg-primary rounded-2xl theme-shadow p-6 hover-glow transition-all duration-300 theme-border-primary border">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">{{ trans('Conversion') }}</p>
-                    <p class="text-3xl font-bold text-gray-900">3.2%</p>
+                    <p class="text-sm font-medium theme-text-secondary">{{ trans('Conversion') }}</p>
+                    <p class="text-3xl font-bold theme-text-primary">3.2%</p>
                     <p class="text-sm text-green-600 mt-1">
                         <i class="fas fa-arrow-up mr-1"></i>0.5% increase
                     </p>
@@ -86,35 +86,35 @@
 
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <div class="bg-white rounded-2xl shadow-md p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ trans('Sales Overview') }}</h3>
-            <div class="h-64 flex items-center justify-center bg-gray-50 rounded-xl">
-                <p class="text-gray-500">Chart Component Here</p>
+        <div class="theme-bg-primary rounded-2xl theme-shadow p-6 theme-border-primary border">
+            <h3 class="text-lg font-semibold theme-text-primary mb-4">{{ trans('Sales Overview') }}</h3>
+            <div class="h-64 flex items-center justify-center theme-bg-secondary rounded-xl">
+                <p class="theme-text-muted">Chart Component Here</p>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-md p-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ trans('Recent Activity') }}</h3>
+        <div class="theme-bg-primary rounded-2xl theme-shadow p-6 theme-border-primary border">
+            <h3 class="text-lg font-semibold theme-text-primary mb-4">{{ trans('Recent Activity') }}</h3>
             <div class="space-y-4">
-                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                <div class="flex items-center space-x-3 p-3 theme-bg-secondary rounded-xl">
                     <div class="w-2 h-2 bg-green-500 rounded-full"></div>
                     <div class="flex-1">
-                        <p class="text-sm font-medium text-gray-900">New user registered</p>
-                        <p class="text-xs text-gray-500">2 minutes ago</p>
+                        <p class="text-sm font-medium theme-text-primary">New user registered</p>
+                        <p class="text-xs theme-text-muted">2 minutes ago</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                <div class="flex items-center space-x-3 p-3 theme-bg-secondary rounded-xl">
                     <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
                     <div class="flex-1">
-                        <p class="text-sm font-medium text-gray-900">Order #1234 completed</p>
-                        <p class="text-xs text-gray-500">5 minutes ago</p>
+                        <p class="text-sm font-medium theme-text-primary">Order #1234 completed</p>
+                        <p class="text-xs theme-text-muted">5 minutes ago</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
+                <div class="flex items-center space-x-3 p-3 theme-bg-secondary rounded-xl">
                     <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
                     <div class="flex-1">
-                        <p class="text-sm font-medium text-gray-900">Payment received</p>
-                        <p class="text-xs text-gray-500">10 minutes ago</p>
+                        <p class="text-sm font-medium theme-text-primary">Payment received</p>
+                        <p class="text-xs theme-text-muted">10 minutes ago</p>
                     </div>
                 </div>
             </div>

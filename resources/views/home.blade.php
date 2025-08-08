@@ -34,7 +34,7 @@
                                     <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
                                         alt="Profile" class="object-cover w-8 h-8 rounded-full">
                                 @else
-                                    <div class="rounded-full flex items-center justify-center text-slate-800 text-sm font-bold">
+                                    <div class="rounded-full flex items-center justify-center theme-text-primary text-sm font-bold">
                                         {{ Auth::user()->getInitials() }}
                                     </div>
                                 @endif
@@ -176,7 +176,7 @@
                                 <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
                                     alt="Profile" class="object-cover w-8 h-8 rounded-full">
                             @else
-                                <div class="rounded-full flex items-center justify-center text-slate-800 text-sm font-bold">
+                                <div class="rounded-full flex items-center justify-center theme-text-primary text-sm font-bold">
                                     {{ Auth::user()->getInitials() }}
                                 </div>
                             @endif

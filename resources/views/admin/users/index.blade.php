@@ -3,16 +3,16 @@
     <div class="mb-6">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">All Users</h1>
-                <p class="text-gray-600 mt-2">Manage and view all registered users</p>
+                <h1 class="text-3xl font-bold theme-text-primary">All Users</h1>
+                <p class="theme-text-secondary mt-2">Manage and view all registered users</p>
             </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div class="px-6 py-4 border-b border-gray-200">
+    <div class="theme-bg-primary rounded-lg theme-shadow-lg overflow-hidden theme-border-primary border">
+        <div class="px-6 py-4 theme-border-primary border-b">
             <div class="flex items-center justify-between">
-                <h2 class="text-xl font-semibold text-gray-800">Users List</h2>
+                <h2 class="text-xl font-semibold theme-text-primary">Users List</h2>
                 <div class="flex items-center space-x-4">
                     <form method="GET" action="{{ route('admin.users') }}" class="flex items-center">
                         <div class="relative">
@@ -20,8 +20,8 @@
                                    name="search" 
                                    value="{{ request('search') }}"
                                    placeholder="Search users..." 
-                                   class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <iconify-icon icon="mdi:magnify" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></iconify-icon>
+                                   class="pl-10 pr-4 py-2 theme-border-primary border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 theme-bg-secondary theme-text-primary">
+                            <iconify-icon icon="mdi:magnify" class="absolute left-3 top-1/2 transform -translate-y-1/2 theme-text-muted"></iconify-icon>
                         </div>
                         <button type="submit" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">
                             Search
@@ -37,33 +37,33 @@
         </div>
         
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="min-w-full divide-y theme-border-primary divide-y">
+                <thead class="theme-bg-secondary">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                             #ID
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                             Image
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                             Name
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                             Email
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                             Joined
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                             Actions
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="theme-bg-primary divide-y theme-border-primary divide-y">
                     @forelse($users as $user)
-                    <tr class="hover:bg-gray-50 transition-colors duration-200">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <tr class="hover:theme-bg-secondary transition-colors duration-200">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm theme-text-muted">
                             {{ $users->firstItem() + $loop->index }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -72,20 +72,20 @@
                                      src="{{ asset('storage/' . $user->profile_image) }}" 
                                      alt="{{ $user->name }}">
                             @else
-                                <div class="h-10 w-10 rounded-full border border-indigo-300 text-slate-800 flex items-center justify-center font-semibold text-sm">
+                                <div class="h-10 w-10 rounded-full border border-indigo-300 theme-text-primary flex items-center justify-center font-semibold text-sm">
                                     {{ $user->getInitials() }}
                                 </div>
                             @endif
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium theme-text-primary">
                             {{ $user->name }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm theme-text-primary">
                             {{ $user->email }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ $user->created_at->format('M d, Y') }}</div>
-                            <div class="text-sm text-gray-500">{{ $user->created_at->format('g:i A') }}</div>
+                            <div class="text-sm theme-text-primary">{{ $user->created_at->format('M d, Y') }}</div>
+                            <div class="text-sm theme-text-muted">{{ $user->created_at->format('g:i A') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex space-x-2">
@@ -104,7 +104,7 @@
                     @empty
                     <tr>
                         <td colspan="6" class="px-6 py-12 text-center">
-                            <div class="text-gray-500">
+                            <div class="theme-text-muted">
                                 <iconify-icon icon="mdi:account-group" class="text-4xl mx-auto mb-4"></iconify-icon>
                                 <p class="text-lg font-medium">No users found</p>
                                 <p class="text-sm">There are no registered users yet.</p>
@@ -117,12 +117,12 @@
         </div>
         
         @if($users->count() > 0)
-        <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+        <div class="px-6 py-4 theme-border-primary border-t theme-bg-secondary">
             <div class="flex items-center justify-between">
-                <div class="text-sm text-gray-700">
+                <div class="text-sm theme-text-secondary">
                     Showing <span class="font-medium">{{ $users->count() }}</span> users
                 </div>
-                <div class="text-sm text-gray-700">
+                <div class="text-sm theme-text-secondary">
                     Total: <span class="font-medium">{{ $users->count() }}</span> users
                 </div>
             </div>
