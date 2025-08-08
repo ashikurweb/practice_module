@@ -19,9 +19,12 @@
                 <a href="#" class="nav-link text-gray-700 hover:text-gray-900 font-medium py-2">About</a>
                 <a href="#" class="nav-link text-gray-700 hover:text-gray-900 font-medium py-2">Contact</a>
             </nav>
+
             
             <!-- Desktop Auth Buttons -->
             <div class="hidden lg:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <x-theme-toggle />
                 <!-- User Dropdown (when logged in) -->
                 @if(Auth::check())
                     <!-- Profile Dropdown for Authenticated Users -->
@@ -166,7 +169,8 @@
                 <a href="#" class="text-gray-700 hover:text-gray-900 font-medium py-2 border-b border-transparent hover:border-gray-200 transition-colors">About</a>
                 <a href="#" class="text-gray-700 hover:text-gray-900 font-medium py-2 border-b border-transparent hover:border-gray-200 transition-colors">Contact</a>
             </nav>
-            
+            <!-- Theme Toggle -->
+            <x-theme-toggle />
             @if(Auth::check())
                 <!-- Mobile User Menu for Authenticated Users -->
                 <div class="border-t border-white/20 pt-6">
