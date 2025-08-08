@@ -211,7 +211,7 @@
     x-transition:leave-end="opacity-0" @click="sidebarOpen = false" class="sidebar-overlay lg:hidden"></div>
 
 <!-- Sidebar -->
-<div class="fixed top-0 left-0 z-50 w-64 h-full sidebar-gradient shadow-2xl sidebar overflow-y-auto lg:translate-x-0 theme-bg-primary theme-border-primary border-r"
+<div class="fixed top-0 left-0 z-50 w-64 h-full sidebar-gradient shadow-2xl sidebar overflow-y-auto lg:translate-x-0 theme-bg-sidebar theme-border-primary border-r"
     :class="sidebarOpen ? 'open' : ''" x-cloak>
 
     <!-- Logo Area -->
