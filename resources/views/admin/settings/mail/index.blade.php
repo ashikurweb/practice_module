@@ -5,7 +5,7 @@
     ]" />
     
     <div class="w-full mx-auto max-w-6xl theme-bg-primary rounded-2xl shadow-[0_0_5px_rgba(0,0,0,0.1)] theme-border-primary border overflow-hidden">
-        <div class="px-8 py-6 bg-gradient-to-r from-purple-50 to-pink-50 theme-border-primary border-b">
+        <div class="px-8 py-6 theme-bg-secondary theme-border-primary border-b">
             <div class="flex items-center space-x-3">
                 <div>
                     <h2 class="text-xl font-semibold theme-text-primary">Email Configuration</h2>
@@ -34,7 +34,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter mail driver (smtp, sendmail, mailgun, etc.)</p>
             </div>
             
             <!-- MAIL HOST * -->
@@ -54,7 +53,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter SMTP host address</p>
             </div>
             
             <!-- MAIL PORT * -->
@@ -74,7 +72,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter SMTP port number (1-65535)</p>
             </div>
             
             <!-- MAIL USERNAME * -->
@@ -94,7 +91,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter SMTP username</p>
             </div>
             
             <!-- MAIL PASSWORD * -->
@@ -114,7 +110,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter SMTP password</p>
             </div>
             
             <!-- MAIL ENCRYPTION * -->
@@ -134,7 +129,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter encryption type (tls, ssl, or leave empty)</p>
             </div>
             
             <!-- MAIL FROM ADDRESS *-->
@@ -154,7 +148,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter from email address (test email will be sent here)</p>
             </div>
             
             <!-- MAIL FROM NAME *-->
@@ -174,7 +167,6 @@
                         {{ $message }}
                     </p>
                 @enderror
-                <p class="text-xs theme-text-muted mt-1">Enter from name</p>
             </div>
             
             <!-- Save and Test Buttons -->
@@ -195,7 +187,7 @@
                 </button>
             </div>
             
-            <!-- সতর্কতা বার্তা -->
+            <!-- Warning Message -->
             <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700">
                 <p class="text-sm">
                     <strong>Important:</strong> 

@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <p class="text-sm theme-text-secondary mb-4">Configure SMTP settings for sending emails and notifications.</p>
-                <a href="{{ route('settings.mail') }}" class="inline-flex items-center text-green-600 hover:text-green-700 text-sm font-medium">
+                <a href="{{ route('admin.mail.configuration') }}" class="inline-flex items-center text-green-600 hover:text-green-700 text-sm font-medium">
                     Configure
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
