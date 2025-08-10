@@ -13,11 +13,7 @@ class LockScreenController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login');
         }
-
-        // Store a session flag indicating screen is locked
         session(['is_locked' => true]);
-
-        // Pass user data to view
         return view('auth.lockscreen', ['user' => Auth::user()]);
     }
 

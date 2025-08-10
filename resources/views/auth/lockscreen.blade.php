@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-image: url('{{ asset('assets/lockscreen/lock-4.jpg') }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -265,6 +265,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(20px);
             letter-spacing: 0.5px;
+            position: relative;
         }
 
         .unlock-button:hover {
@@ -276,6 +277,27 @@
 
         .unlock-button:active {
             transform: translateY(-1px);
+        }
+
+        .unlock-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .unlock-button .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        .unlock-button.loading .loading-spinner {
+            display: inline-block;
         }
 
         /* Weather info */
@@ -393,6 +415,10 @@
             75% { transform: translateX(8px); }
         }
 
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .time-display {
@@ -480,45 +506,37 @@
 
          <!-- Login Screen (Second View) -->
         <div class="login-screen" id="loginScreen">
-            <!-- Back Button -->
-            <div class="back-button" id="backButton">
-                <span></span>
-            </div>
-
             <!-- Glass Card -->
             <div class="glass-card">
                 <!-- Profile Section -->
                 <div class="profile-container">
-                    @if(Auth::user()->profile_image)
-                        <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
-                             alt="Profile" 
-                             class="profile-image">
-                    @else
-                        <div class="profile-initials">
-                            {{ Auth::user()->getInitials() }}
-                        </div>
-                    @endif
+                    <!-- Replace with your Laravel blade syntax -->
+                    <div class="profile-initials">
+                        JD
+                    </div>
                 </div>
 
                 <!-- User Name -->
-                <h2 class="user-name">{{ $user->name }}</h2>
+                <h2 class="user-name">John Doe</h2>
 
                 <!-- Unlock Form -->
-                <form method="POST" action="{{ route('lockscreen.unlock') }}" class="unlock-form">
+                <form method="POST" action="{{ route('lockscreen.unlock') }}" class="unlock-form" id="unlockForm">
                     @csrf
                     <input type="password" 
                            name="password" 
                            placeholder="Password" 
                            class="password-input" 
+                           id="passwordInput"
                            required 
                            autofocus>
                     
-                    @error('password')
-                        <p class="error-message">{{ $message }}</p>
-                    @enderror
+                    <div class="error-message" id="errorMessage" style="display: none;">
+                        Incorrect password
+                    </div>
 
-                    <button type="submit" class="unlock-button">
-                        Sign In
+                    <button type="submit" class="unlock-button" id="unlockButton">
+                        <span class="loading-spinner"></span>
+                        <span class="button-text">Sign In</span>
                     </button>
                 </form>
             </div>
@@ -533,9 +551,15 @@
             const timeDisplay = document.getElementById('timeDisplay');
             const dateDisplay = document.getElementById('dateDisplay');
             const scrollBar = document.getElementById('scrollBar');
+            const unlockForm = document.getElementById('unlockForm');
+            const unlockButton = document.getElementById('unlockButton');
+            const buttonText = unlockButton.querySelector('.button-text');
+            const passwordInput = document.getElementById('passwordInput');
+            const errorMessage = document.getElementById('errorMessage');
             
             let scrollThreshold = 0;
             let isLocked = true;
+            let isSubmitting = false;
 
             // Update time and date
             function updateTime() {
@@ -568,48 +592,42 @@
 
             // Click outside login form to close
             loginScreen.addEventListener('click', function(e) {
-                // Only close if clicking outside the glass card
-                if (e.target === loginScreen) {
+                if (e.target === loginScreen && !isSubmitting) {
                     deactivateLoginScreen();
                 }
             });
 
             // Handle scroll events
             function handleScroll(event) {
+                if (isSubmitting) return;
+                
                 event.preventDefault();
                 
                 const delta = event.deltaY || event.detail || event.wheelDelta;
                 
-                // Handle scroll direction
                 if (isLocked) {
-                    // On default screen - scroll down to activate login
                     if (delta > 0) {
                         scrollThreshold += delta;
                     } else {
                         scrollThreshold -= Math.abs(delta);
                     }
                 } else {
-                    // On login screen - scroll up to go back
                     if (delta < 0) {
-                        scrollThreshold -= Math.abs(delta) * 2; // Faster return
+                        scrollThreshold -= Math.abs(delta) * 2;
                     } else {
                         scrollThreshold += delta;
                     }
                 }
                 
-                // Clamp scroll threshold between -100 and 300
                 scrollThreshold = Math.max(-100, Math.min(300, scrollThreshold));
                 
-                // Update progress bar
                 const progress = Math.max(0, (scrollThreshold / 300) * 100);
                 scrollBar.style.height = progress + '%';
                 
-                // Activate login screen when scrolling down enough
                 if (scrollThreshold >= 300 && isLocked) {
                     activateLoginScreen();
                 }
                 
-                // Deactivate when scrolling up enough
                 if (scrollThreshold <= 0 && !isLocked) {
                     deactivateLoginScreen();
                 }
@@ -622,9 +640,7 @@
                 background.classList.add('blurred');
                 document.body.style.cursor = 'default';
                 
-                // Focus on password input after animation
                 setTimeout(() => {
-                    const passwordInput = document.querySelector('.password-input');
                     if (passwordInput) {
                         passwordInput.focus();
                     }
@@ -632,6 +648,8 @@
             }
 
             function deactivateLoginScreen() {
+                if (isSubmitting) return;
+                
                 isLocked = true;
                 scrollThreshold = 0;
                 scrollBar.style.height = '0%';
@@ -639,6 +657,13 @@
                 defaultScreen.classList.remove('hidden');
                 background.classList.remove('blurred');
                 document.body.style.cursor = 'pointer';
+                
+                // Reset form
+                passwordInput.value = '';
+                errorMessage.style.display = 'none';
+                unlockButton.classList.remove('loading');
+                unlockButton.disabled = false;
+                buttonText.textContent = 'Sign In';
             }
 
             // Add scroll event listeners
@@ -654,20 +679,18 @@
             });
 
             document.addEventListener('touchmove', function(e) {
+                if (isSubmitting) return;
+                
                 e.preventDefault();
                 currentY = e.touches[0].clientY;
                 const deltaY = startY - currentY;
                 
-                // Handle touch direction
                 if (isLocked) {
-                    // On default screen - swipe up to activate login
                     scrollThreshold += deltaY * 2;
                 } else {
-                    // On login screen - swipe down to go back
-                    scrollThreshold -= deltaY * 3; // Faster return on touch
+                    scrollThreshold -= deltaY * 3;
                 }
                 
-                // Clamp scroll threshold
                 scrollThreshold = Math.max(-100, Math.min(300, scrollThreshold));
                 
                 const progress = Math.max(0, (scrollThreshold / 300) * 100);
@@ -686,9 +709,31 @@
 
             // ESC key to go back
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !isLocked) {
+                if (e.key === 'Escape' && !isLocked && !isSubmitting) {
                     deactivateLoginScreen();
                 }
+            });
+
+            // Handle form submission with loading state
+            unlockForm.addEventListener('submit', function(e) {
+                if (isSubmitting) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                isSubmitting = true;
+                unlockButton.classList.add('loading');
+                unlockButton.disabled = true;
+                buttonText.textContent = 'Signing In...';
+                errorMessage.style.display = 'none';
+                
+                // Let the form submit naturally to Laravel
+                // The loading state will be visible until the page redirects or reloads
+            });
+
+            // Handle password input events
+            passwordInput.addEventListener('input', function() {
+                errorMessage.style.display = 'none';
             });
 
             // Create floating particles
@@ -714,26 +759,6 @@
             
             setInterval(createParticle, 1200);
 
-            // Handle form submission
-            document.querySelector('.unlock-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const button = document.querySelector('.unlock-button');
-                const passwordInput = document.querySelector('.password-input');
-                
-                button.innerHTML = 'Signing in...';
-                button.style.background = 'rgba(255, 255, 255, 0.25)';
-                passwordInput.disabled = true;
-                
-                // Simulate login process
-                setTimeout(() => {
-                    alert('Login functionality would go here');
-                    button.innerHTML = 'Sign In';
-                    button.style.background = 'rgba(255, 255, 255, 0.15)';
-                    passwordInput.disabled = false;
-                    passwordInput.value = '';
-                }, 2000);
-            });
-
             // Prevent context menu
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
@@ -744,6 +769,17 @@
                 e.preventDefault();
                 window.scrollTo(0, 0);
             });
+
+            // Show error message if there are Laravel validation errors
+            @if($errors->has('password'))
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = '{{ $errors->first('password') }}';
+                // Auto-activate login screen if there's an error
+                setTimeout(() => {
+                    scrollThreshold = 300;
+                    activateLoginScreen();
+                }, 100);
+            @endif
         });
     </script>
 </body>
