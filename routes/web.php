@@ -11,7 +11,9 @@ use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\MailConfigurationController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SocialLoginController;
+use Illuminate\Auth\Events\PasswordReset;
 
 // Home Route
 Route::get('/', function () {
@@ -23,6 +25,11 @@ Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.swi
 Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionUserController::class, 'index'])->name('login');
     Route::post('/login', [SessionUserController::class, 'store'])->name('login.store');
+
+    Route::get('/forgot', [PasswordResetController::class, 'index'])->name('forgot');
+    Route::post('/forgot', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('/reset/{token}', [PasswordResetController::class, 'resetPassword']);
+    Route::get('/reset/{token}', [PasswordResetController::class, 'resetPasswordStore'])->name('reset.password.update');
 
     Route::get('/register', [RegisterUserController::class, 'index'])->name('register');
     Route::post('/register', [RegisterUserController::class, 'store'])->name('register.store');
