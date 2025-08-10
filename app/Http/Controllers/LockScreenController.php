@@ -13,28 +13,31 @@ class LockScreenController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login');
         }
+        if (session('is_locked')) {
+            return view('auth.lockscreen', ['user' => Auth::user()]);
+        }
+
         session(['is_locked' => true]);
         return view('auth.lockscreen', ['user' => Auth::user()]);
     }
 
-     public function unlock(Request $request)
+    public function unlock(Request $request)
     {
         $request->validate([
-            'password' => 'required',
+            'password' => 'required|string',
         ]);
 
         $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login');
+        
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()
+                ->withErrors(['password' => 'Incorrect password'])
+                ->withInput();
         }
 
-        if (Hash::check($request->password, $user->password)) {
-            session()->forget('is_locked');
-
-            return redirect()->route('admin.dashboard');
-        }
-
-        return back()->withErrors(['password' => 'Incorrect password']);
+        session()->forget('is_locked');
+        $request->session()->regenerate();
+        
+        return redirect()->intended(route('admin.dashboard'));
     }
 }

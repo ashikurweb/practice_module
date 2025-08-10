@@ -46,6 +46,11 @@
             border-left: 4px solid #60a5fa;
         }
     </style>
+
+    <!-- Include idle timer only for authenticated users -->
+    @if (Auth::check() && !request()->is('lockscreen'))
+        <x-idle-timer :minutes="config('auth.idle_timeout', 2)" />
+    @endif
 </head>
 <body class="theme-bg-content font-sans antialiased" 
       x-data="{ 
