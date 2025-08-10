@@ -52,17 +52,17 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getInitials(): string
+    public function getInitials()
     {
-        $name = trim($this->name);
-        $words = explode(' ', $name);
+        $words = explode(' ', $this->name);
+        $initials = '';
         
-        if (count($words) >= 2) {
-            // If there are 2 or more words, take first letter of first and second word
-            return strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
-        } else {
-            // If only one word, take first 2 letters
-            return strtoupper(substr($name, 0, 2));
+        foreach ($words as $word) {
+            if (!empty($word)) {
+                $initials .= strtoupper($word[0]);
+            }
         }
+        
+        return substr($initials, 0, 2);  
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\MailConfigurationController;
+use App\Http\Controllers\SocialLoginController;
 
 // Home Route
 Route::get('/', function () {
@@ -24,6 +25,9 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/register', [RegisterUserController::class, 'index'])->name('register');
     Route::post('/register', [RegisterUserController::class, 'store'])->name('register.store');
+
+    Route::get('login/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name('social.login');
+    Route::get('login/{provider}/callback', [SocialLoginController::class, 'handleProviderCallback'])->name('social.callback');
 });
 
 
