@@ -490,7 +490,7 @@
 
         <!-- Default Screen -->
         <div class="default-screen" id="defaultScreen">
-            <div class="time-display" id="timeDisplay">15:56</div>
+            <div class="time-display" id="timeDisplay">3:56:42 PM</div>
             <div class="date-display" id="dateDisplay">Sunday 10 August</div>
             <div class="scroll-hint">
                 <div>Scroll or click anywhere to unlock</div>
@@ -510,14 +510,18 @@
             <div class="glass-card">
                 <!-- Profile Section -->
                 <div class="profile-container">
-                    <!-- Replace with your Laravel blade syntax -->
-                    <div class="profile-initials">
-                        JD
-                    </div>
+                    @if(Auth::user()->profile_image)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
+                             alt="Profile" class="profile-image">
+                    @else
+                        <div class="profile-initials">
+                            {{ Auth::user()->getInitials() }}
+                        </div>
+                    @endif
                 </div>
 
                 <!-- User Name -->
-                <h2 class="user-name">John Doe</h2>
+                <h2 class="user-name">{{ Auth::user()->name }}</h2>
 
                 <!-- Unlock Form -->
                 <form method="POST" action="{{ route('lockscreen.unlock') }}" class="unlock-form" id="unlockForm">
@@ -563,16 +567,25 @@
 
             // Update time and date
             function updateTime() {
+                // Create a date object with Bangladesh timezone (UTC+6)
                 const now = new Date();
+                const bdTime = new Date(now.getTime() + (6 * 60 * 60 * 1000)); // UTC+6 for Bangladesh
+                
+                // Get user's locale preference for 12/24 hour format
+                const use24Hour = !bdTime.toLocaleTimeString().includes('AM') && !bdTime.toLocaleTimeString().includes('PM');
+                
                 const timeOptions = { 
                     hour: '2-digit', 
                     minute: '2-digit',
-                    hour12: false 
+                    second: '2-digit',
+                    hour12: !use24Hour, // Use system preference for 12/24 hour format
+                    timeZone: 'Asia/Dhaka' // Bangladesh timezone
                 };
                 const dateOptions = { 
                     weekday: 'long', 
                     day: 'numeric', 
-                    month: 'long' 
+                    month: 'long',
+                    timeZone: 'Asia/Dhaka' // Bangladesh timezone
                 };
                 
                 timeDisplay.textContent = now.toLocaleTimeString('en-US', timeOptions);
