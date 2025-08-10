@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.guest>
     <style>
         .glass-effect {
             background: rgba(255, 255, 255, 0.85);

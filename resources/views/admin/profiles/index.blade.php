@@ -1,4 +1,4 @@
-<x-layouts.admin>
+<x-layouts.auth>
     <div class="p-6 theme-bg-content min-h-screen">
         <!-- Header -->
         <div class="mb-8">
@@ -325,4 +325,4 @@
             }
         }
     </script>
-</x-layouts.admin>
+</x-layouts.auth>

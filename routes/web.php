@@ -4,12 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\LockScreenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Controllers\SessionUserController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\MailConfigurationController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SocialLoginController;
+use Illuminate\Auth\Events\PasswordReset;
 
 // Home Route
 Route::get('/', function () {
@@ -22,8 +26,16 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionUserController::class, 'index'])->name('login');
     Route::post('/login', [SessionUserController::class, 'store'])->name('login.store');
 
+    Route::get('/forgot', [PasswordResetController::class, 'index'])->name('forgot');
+    Route::post('/forgot', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::post('/reset/{token}', [PasswordResetController::class, 'resetPassword']);
+    Route::get('/reset/{token}', [PasswordResetController::class, 'resetPasswordStore'])->name('reset.password.update');
+
     Route::get('/register', [RegisterUserController::class, 'index'])->name('register');
     Route::post('/register', [RegisterUserController::class, 'store'])->name('register.store');
+
+    Route::get('login/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name('social.login');
+    Route::get('login/{provider}/callback', [SocialLoginController::class, 'handleProviderCallback'])->name('social.callback');
 });
 
 
@@ -41,6 +53,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/mail/configuration', [MailConfigurationController::class, 'index'])->name('mail.configuration');
         Route::post('/mail/configuration/update', [MailConfigurationController::class, 'update'])->name('mail.configuration.update');
     });
+
+
+    Route::get('lockscreen', [LockScreenController::class, 'show'])->name('lockscreen');
+    Route::post('/lockscreen/unlock', [LockScreenController::class, 'unlock'])->name('lockscreen.unlock');
 
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');

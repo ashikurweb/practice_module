@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::component('layouts.app', 'layouts.app');
-        Blade::component('layouts.admin', 'layouts.admin');
+        Blade::component('layouts.guest', 'layouts.guest');
+        Blade::component('layouts.auth', 'layouts.auth');
         Blade::component('components.header', 'components.header');
         Blade::component('components.sidebar', 'components.sidebar');
         Blade::component('components.theme-toggle', 'components.theme-toggle');
