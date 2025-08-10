@@ -1,4 +1,4 @@
-<x-layouts.admin>
+<x-layouts.auth>
     <div class="space-y-8">
         <!-- Page Header -->
         <div>
@@ -146,4 +146,4 @@
             </div>
         </div>
     </div>
-</x-layouts.admin>
+</x-layouts.auth>

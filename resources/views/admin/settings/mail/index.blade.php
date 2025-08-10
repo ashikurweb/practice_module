@@ -1,4 +1,4 @@
-<x-layouts.admin>
+<x-layouts.auth>
     <x-breadcrumb :breadcrumbs="[
         ['label' => 'Settings', 'url' => route('settings')],
         ['label' => 'Mail Configuration']
@@ -228,4 +228,4 @@
             });
         });
     </script>
-</x-layouts.admin>
+</x-layouts.auth>

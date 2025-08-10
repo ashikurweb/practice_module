@@ -12,45 +12,6 @@
         import heroicons from 'https://cdn.jsdelivr.net/npm/heroicons@2.2.0/+esm'
         </script>        
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    {{-- <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        }
-                    },
-                    animation: {
-                        'slide-in': 'slideIn 0.3s ease-out',
-                        'fade-in': 'fadeIn 0.2s ease-out',
-                        'bounce-subtle': 'bounceSubtle 0.6s ease-out',
-                    },
-                    keyframes: {
-                        slideIn: {
-                            '0%': { transform: 'translateX(-100%)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        bounceSubtle: {
-                            '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
-                            '40%': { transform: 'translateY(-4px)' },
-                            '60%': { transform: 'translateY(-2px)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script> --}}
     <style>
         .glass-effect {
             background: rgba(255, 255, 255, 0.1);
@@ -118,7 +79,7 @@
     <div class="lg:ml-64 flex flex-col min-h-screen">
         <!-- Header -->
         <x-components.header />
-        <main class="flex-1 container mx-auto px-4 py-8 theme-bg-content">
+        <main class="flex-1 container mx-auto mt-5 px-4 py-8">
             {{ $slot }}
         </main>
     </div>

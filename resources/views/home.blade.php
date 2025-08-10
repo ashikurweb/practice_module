@@ -1,4 +1,4 @@
-    <x-layouts.app>
+    <x-layouts.guest>
     <!-- Main Container with Grid Background -->
     <div class="min-h-screen w-full bg-[#f8fafc] relative pt-20">
         <!-- Animated Grid Background -->
@@ -75,4 +75,4 @@
 
     </div>
         @include('frontend.blog.index') <!-- Blog Section -->
-    </x-layouts.app>
+    </x-layouts.guest>
