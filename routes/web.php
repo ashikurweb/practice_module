@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\LockScreenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Requests\UpdatePasswordRequest;
@@ -45,6 +46,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/mail/configuration', [MailConfigurationController::class, 'index'])->name('mail.configuration');
         Route::post('/mail/configuration/update', [MailConfigurationController::class, 'update'])->name('mail.configuration.update');
     });
+
+
+    Route::get('lockscreen', [LockScreenController::class, 'show'])->name('lockscreen');
+    Route::post('/lockscreen/unlock', [LockScreenController::class, 'unlock'])->name('lockscreen.unlock');
 
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');

@@ -183,12 +183,17 @@
                         <span>{{ __('My Profile') }}</span>
                     </a>
                     
-                    <a href="#" class="flex items-center px-4 py-3 theme-text-secondary hover:theme-bg-secondary transition-colors">
+                    <a href="{{ route('settings') }}" class="flex items-center px-4 py-3 theme-text-secondary hover:theme-bg-secondary transition-colors">
                         <iconify-icon icon="duo-icons:settings" class="text-xl mr-2"></iconify-icon>
                         <span>{{ __('Account Settings') }}</span>
                     </a>
-                    
-                    <div class="border-t theme-border-secondary mt-2 pt-2">
+
+                    <a href="{{ route('lockscreen') }}" class="flex items-center px-4 py-3 theme-text-secondary hover:theme-bg-secondary transition-colors">
+                        <iconify-icon icon="duo-icons:moon-stars" class="text-xl mr-2"></iconify-icon>
+                        <span>{{ __('Lock Screen') }}</span>
+                    </a>
+
+                    <div class="theme-border-secondary">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 transition-colors">
