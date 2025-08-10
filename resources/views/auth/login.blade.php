@@ -32,19 +32,31 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-
         .error-message {
             color: #dc2626;
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
-
         .input-error {
             border-color: #dc2626 !important;
             box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
         }
+        
+        /* Loading spinner animation */
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
-
     <div class="min-h-screen flex items-center justify-center p-4">
     
     <div class="w-full max-w-md mx-auto">
@@ -56,9 +68,8 @@
                     Welcome Back
                 </h2>
             </div>
-
             <!-- Login Form -->
-            <form class="space-y-5" action="{{ route('login.store') }}" method="POST">
+            <form id="loginForm" class="space-y-5" action="{{ route('login.store') }}" method="POST">
                 @csrf
                 
                 <!-- Email Field -->
@@ -79,7 +90,6 @@
                         <p class="error-message">{{ $message }}</p>
                     @enderror
                 </div>
-
                 <!-- Password Field -->
                 <div class="space-y-2">
                     <label for="password" class="text-sm font-medium text-gray-700">Password</label>
@@ -106,7 +116,6 @@
                         <p class="error-message">{{ $message }}</p>
                     @enderror
                 </div>
-
                 <!-- Remember Me & Forgot Password -->
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
@@ -117,25 +126,26 @@
                             Remember me
                         </label>
                     </div>
-
                     <div class="text-sm">
                         <a href="#" class="font-medium text-purple-600 hover:text-purple-500 transition-colors">
                             Forgot password?
                         </a>
                     </div>
                 </div>
-
                 <!-- Submit Button -->
-                <button type="submit" 
+                <button type="submit" id="submitBtn"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl text-sm font-medium text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200 shadow-lg">
-                    <span class="flex items-center">
-                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
-                            </svg>
+                    <span id="btnContent" class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                        </svg>
                         Sign In
                     </span>
+                    <span id="btnLoading" class="hidden flex items-center">
+                        <div class="spinner mr-2"></div>
+                        Processing...
+                    </span>
                 </button>
-
                 <!-- Divider -->
                 <div class="mt-6">
                     <div class="relative">
@@ -147,7 +157,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Social Login -->
                 <div class="mt-6 grid grid-cols-2 gap-3">
                     <form action="{{ route('social.login', 'google') }}">
@@ -172,7 +181,6 @@
                         </button>
                     </form>
                 </div>
-
                 <!-- Sign Up Link -->
                 <div class="text-center mt-6">
                     <p class="text-sm text-gray-600">
@@ -185,14 +193,18 @@
             </form>
         </div>
     </div>
-
-    <!-- JavaScript for Password Toggle -->
+    <!-- JavaScript for Password Toggle and Form Submission -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const togglePassword = document.getElementById('togglePassword');
             const password = document.getElementById('password');
             const eyeIcon = document.getElementById('eyeIcon');
-
+            const loginForm = document.getElementById('loginForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnContent = document.getElementById('btnContent');
+            const btnLoading = document.getElementById('btnLoading');
+            
+            // Password toggle functionality
             togglePassword.addEventListener('click', function() {
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
@@ -207,6 +219,24 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                     `;
                 }
+            });
+            
+            // Form submission with loading state
+            loginForm.addEventListener('submit', function(e) {
+                // Prevent default form submission
+                e.preventDefault();
+                
+                // Disable the button to prevent multiple submissions
+                submitBtn.disabled = true;
+                
+                // Show loading spinner and hide original content
+                btnContent.classList.add('hidden');
+                btnLoading.classList.remove('hidden');
+                
+                // Submit the form after a small delay to allow UI to update
+                setTimeout(function() {
+                    loginForm.submit();
+                }, 100);
             });
         });
     </script>
