@@ -302,22 +302,12 @@
                 <a href="#"
                     class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2 opacity-60"></iconify-icon>
-                    <span class="text-sm font-medium">All Products</span>
+                    <span class="text-sm font-medium">Blog</span>
                 </a>
-                <a href="#"
+                <a href="{{ route('categories') }}"
                     class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
                     <iconify-icon icon="duo-icons:align-center" class="text-xl mr-2 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Categories</span>
-                </a>
-                <a href="#"
-                    class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
-                    <iconify-icon icon="duo-icons:align-bottom" class="text-xl mr-2 opacity-60"></iconify-icon>
-                    <span class="text-sm font-medium">Inventory</span>
-                </a>
-                <a href="#"
-                    class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
-                    <iconify-icon icon="duo-icons:bell" class="text-xl mr-2 opacity-60"></iconify-icon>
-                    <span class="text-sm font-medium">Stock Alerts</span>
                 </a>
             </div>
         </div>

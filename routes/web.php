@@ -3,17 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\LocaleController;
-use App\Http\Controllers\LockScreenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Controllers\LockScreenController;
 use App\Http\Controllers\SessionUserController;
-use App\Http\Controllers\RegisterUserController;
-use App\Http\Controllers\MailConfigurationController;
-use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SocialLoginController;
-use Illuminate\Auth\Events\PasswordReset;
+use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\MailConfigurationController;
 
 // Home Route
 Route::get('/', function () {
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/users', [UsersController::class, 'index'])->name('users');
     });
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 

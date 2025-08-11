@@ -33,6 +33,21 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
+
+        /* Loading spinner animation */
+    .spinner {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 2px solid white;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
     </style>
 
     <div class="min-h-screen flex items-center justify-center p-4">
@@ -158,13 +173,17 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" 
+                    <button type="submit" id="submitBtn"
                             class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl text-sm font-medium text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200 shadow-lg">
-                        <span class="flex items-center">
-                                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-                                </svg>
-                            Create Account
+                        <span id="btnContent" class="flex items-center">
+                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                            </svg>
+                            Sign Up
+                        </span>
+                        <span id="btnLoading" class="hidden flex items-center">
+                            <div class="spinner mr-2"></div>
+                            Processing...
                         </span>
                     </button>
 
@@ -189,7 +208,6 @@
             const togglePassword = document.getElementById('togglePassword');
             const password = document.getElementById('password');
             const eyeIcon = document.getElementById('eyeIcon');
-
             togglePassword.addEventListener('click', function() {
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
@@ -205,12 +223,11 @@
                     `;
                 }
             });
-
+            
             // Confirm password field toggle
             const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
             const passwordConfirm = document.getElementById('password_confirmation');
             const eyeIconConfirm = document.getElementById('eyeIconConfirm');
-
             togglePasswordConfirm.addEventListener('click', function() {
                 const type = passwordConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordConfirm.setAttribute('type', type);
@@ -224,6 +241,30 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                     `;
+                }
+            });
+    
+            // Form submission handling
+            const form = document.querySelector('form');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnContent = document.getElementById('btnContent');
+            const btnLoading = document.getElementById('btnLoading');
+    
+            form.addEventListener('submit', function(e) {
+                // Only show loading state if form is valid
+                if (form.checkValidity()) {
+                    // Prevent default submission temporarily
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    btnContent.classList.add('hidden');
+                    btnLoading.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    // Re-submit the form after a brief delay to allow UI update
+                    setTimeout(() => {
+                        form.submit();
+                    }, 100);
                 }
             });
         });
