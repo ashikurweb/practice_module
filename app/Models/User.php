@@ -65,4 +65,9 @@ class User extends Authenticatable
         
         return substr($initials, 0, 2);  
     }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }
