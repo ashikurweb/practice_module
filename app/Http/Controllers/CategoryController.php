@@ -22,22 +22,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Category::query();
-        
-        // Search functionality
-        if ($request->has('search') && $request->search) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('slug', 'like', "%{$search}%")
-                  ->orWhere('short_content', 'like', "%{$search}%");
-            });
-        }
-        
-        // Dynamic pagination with default 10 per page
-        $perPage = $request->get('per_page', 10);
-        $categories = $query->latest()->paginate($perPage)->withQueryString();
-        
+        $categories = Category::latest()->paginate(10);   
         return view('admin.blog-category.index', compact('categories'));
     }
 
@@ -46,8 +31,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.blog-category.create', compact('categories'));
+        return view('admin.blog-category.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -55,20 +41,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $data = $request->validated();
-        
-        // Generate slug if not provided
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['name']);
-        }
-        
-        // Handle image upload using ImageService
-        if ($request->hasFile('image')) {
-            $data['image'] = $this->imageService->storeImage($request->file('image'), 'categories');
-        }
-        
+        $data = $this->prepareCategoryData($request);
+
         Category::create($data);
-        
+
         return redirect()->route('categories.index')
             ->with('success', 'Category created successfully');
     }
@@ -86,8 +62,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $categories = Category::where('id', '!=', $category->id)->get();
-        return view('admin.blog-category.edit', compact('category', 'categories'));
+        return view('admin.blog-category.edit', [
+            'category' => $category,
+            'categories' => Category::where('id', '!=', $category->id)->get()
+        ]);
     }
 
     /**
@@ -95,23 +73,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $data = $request->validated();
-        
-        // Generate slug if not provided
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['name']);
-        }
-        
-        // Handle image upload using ImageService
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            $this->imageService->deleteImage($category->image);
-            
-            $data['image'] = $this->imageService->storeImage($request->file('image'), 'categories');
-        }
-        
+        $data = $this->prepareCategoryData($request, $category);
         $category->update($data);
-        
+
         return redirect()->route('categories.index')
             ->with('success', 'Category updated successfully');
     }
@@ -121,12 +85,29 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // Delete image if exists using ImageService
         $this->imageService->deleteImage($category->image);
-        
         $category->delete();
         
         return redirect()->route('categories.index')
             ->with('success', 'Category deleted successfully');
+    }
+
+    /**
+     * Prepare category data for storage or update.
+     */
+    private function prepareCategoryData(Request $request, Category $category = null): array
+    {
+        $data = $request->validated();
+        $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
+
+        if ($request->hasFile('image')) {
+            if ($category) {
+                $this->imageService->deleteImage($category->image);
+            }
+
+            $data['image'] = $this->imageService->storeImage($request->file('image'), 'categories');
+        }
+
+        return $data;
     }
 }

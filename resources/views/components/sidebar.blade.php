@@ -12,89 +12,50 @@
     }
 
     .sidebar-gradient {
-        background: linear-gradient(180deg,
-                var(--bg-primary) 0%,
-                var(--bg-primary) 25%,
-                var(--bg-primary) 50%,
-                var(--bg-primary) 75%,
-                var(--bg-primary) 100%);
-        backdrop-filter: blur(20px);
-        border-right: 2px solid var(--border-primary);
-        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.05);
+        background: var(--bg-primary);
+        border-right: 1px solid var(--border-primary);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
 
     .menu-item {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s ease;
         position: relative;
-        overflow: hidden;
         color: var(--text-secondary);
-    }
-
-    .menu-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-    }
-
-    .menu-item:hover::before {
-        left: 100%;
+        border-radius: 8px;
     }
 
     .menu-item:hover {
-        background: rgba(var(--accent-primary), 0.1);
-        transform: translateX(4px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        border-left: 3px solid var(--accent-primary);
+        background: rgba(var(--accent-primary), 0.08);
         color: var(--text-primary);
     }
 
     .active-menu {
-        background: linear-gradient(135deg, var(--accent-tertiary), var(--bg-secondary));
-        border-left: 4px solid var(--accent-primary);
-        box-shadow:
-            0 4px 20px rgba(var(--accent-primary), 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        transform: translateX(2px);
+        background: linear-gradient(135deg, rgba(var(--accent-primary), 0.12), rgba(var(--accent-primary), 0.08));
+        border-left: 3px solid var(--accent-primary);
+        box-shadow: 0 2px 8px rgba(var(--accent-primary), 0.15), 
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
         color: var(--accent-primary);
     }
 
-    .active-menu i {
+    .active-menu iconify-icon {
         color: var(--accent-primary);
-        transform: scale(1.1);
     }
 
     .submenu-item {
         position: relative;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         color: var(--text-secondary);
-    }
-
-    .submenu-item::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
-        transition: width 0.3s ease;
-        transform: translateY(-50%);
-    }
-
-    .submenu-item:hover::before {
-        width: 20px;
+        border-radius: 6px;
     }
 
     .submenu-item:hover {
-        background: rgba(var(--accent-primary), 0.1);
-        transform: translateX(8px);
-        padding-left: 1.5rem;
+        background: rgba(var(--accent-primary), 0.06);
         color: var(--text-primary);
+    }
+
+    .submenu-active {
+        color: var(--accent-primary);
+        font-weight: 500;
     }
 
     .glass-effect {
@@ -107,19 +68,6 @@
     .logo-icon {
         background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
         box-shadow: 0 4px 15px rgba(var(--accent-primary), 0.3);
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-        0%,
-        100% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.05);
-        }
     }
 
     .user-profile {
@@ -159,12 +107,9 @@
     }
 
     @keyframes blink {
-
-        0%,
-        100% {
+        0%, 100% {
             opacity: 1;
         }
-
         50% {
             opacity: 0.5;
         }
@@ -235,13 +180,11 @@
         </a>
 
         <!-- Analytics with Dropdown -->
-        <div x-data="{ open: false }" x-cloak>
+        <div x-data="{ open: {{ request()->routeIs('analytics.*') ? 'true' : 'false' }} }" x-cloak>
             <button @click="open = !open"
-                class="menu-item w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300">
+                class="menu-item w-full flex items-center justify-between px-4 py-3 rounded-xl {{ request()->routeIs('analytics.*') ? 'active-menu' : '' }}">
                 <div class="flex items-center">
-                    <!-- Iconify Chart Line Icon -->
-                    <iconify-icon icon="mdi:chart-line"
-                        class="w-5 text-center mr-3"></iconify-icon>
+                    <iconify-icon icon="mdi:chart-line" class="w-5 text-center mr-3"></iconify-icon>
                     <span class="font-medium">Analytics</span>
                 </div>
                 <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform duration-300"
@@ -255,21 +198,18 @@
                 x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                 x-transition:leave-end="opacity-0 transform scale-95 translate-y-2" class="ml-4 mt-2 space-y-1">
                 <a href="#"
-                    class="flex items-center px-4 py-2 theme-text-secondary hover:theme-text-primary rounded-lg transition-all duration-300">
-                    <iconify-icon icon="mdi:chart-line"
-                        class="w-5 text-center mr-3 opacity-60"></iconify-icon>
+                    class="submenu-item flex items-center px-4 py-2 rounded-lg {{ request()->routeIs('analytics.reports') ? 'submenu-active' : '' }}">
+                    <iconify-icon icon="mdi:chart-line" class="w-5 text-center mr-3 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Reports</span>
                 </a>
                 <a href="#"
-                    class="flex items-center px-4 py-2 theme-text-secondary hover:theme-text-primary rounded-lg transition-all duration-300">
-                    <iconify-icon icon="mdi:chart-line"
-                        class="w-5 text-center mr-3 opacity-60"></iconify-icon>
+                    class="submenu-item flex items-center px-4 py-2 rounded-lg {{ request()->routeIs('analytics.insights') ? 'submenu-active' : '' }}">
+                    <iconify-icon icon="mdi:chart-line" class="w-5 text-center mr-3 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Insights</span>
                 </a>
                 <a href="#"
-                    class="flex items-center px-4 py-2 theme-text-secondary hover:theme-text-primary rounded-lg transition-all duration-300">
-                    <iconify-icon icon="mdi:chart-line"
-                        class="w-5 text-center mr-3 opacity-60"></iconify-icon>
+                    class="submenu-item flex items-center px-4 py-2 rounded-lg {{ request()->routeIs('analytics.realtime') ? 'submenu-active' : '' }}">
+                    <iconify-icon icon="mdi:chart-line" class="w-5 text-center mr-3 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Real-time Data</span>
                 </a>
             </div>
@@ -282,12 +222,12 @@
         </a>
 
         <!-- Products with Dropdown -->
-        <div x-data="{ open: false }" x-cloak>
+        <div x-data="{ open: {{ request()->routeIs('blog.*', 'categories.*') ? 'true' : 'false' }} }" x-cloak>
             <button @click="open = !open"
-                class="menu-item w-full flex items-center justify-between px-4 py-3 rounded-xl">
+                class="menu-item w-full flex items-center justify-between px-4 py-3 rounded-xl {{ request()->routeIs('blog.*', 'categories.*') ? 'active-menu' : '' }}">
                 <div class="flex items-center">
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2"></iconify-icon>
-                    <span class="font-medium">Content</span>
+                    <span class="font-medium">Products</span>
                 </div>
                 <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform duration-300"
                     :class="open ? 'rotate-180' : ''"></iconify-icon>
@@ -300,12 +240,12 @@
                 x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                 x-transition:leave-end="opacity-0 transform scale-95 translate-y-2" class="ml-4 mt-2 space-y-1">
                 <a href="#"
-                    class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
+                    class="submenu-item flex items-center px-4 py-2 rounded-lg {{ request()->routeIs('blog.*') ? 'submenu-active' : '' }}">
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Blog</span>
                 </a>
                 <a href="{{ route('categories.index') }}"
-                    class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
+                    class="submenu-item flex items-center px-4 py-2 rounded-lg {{ request()->routeIs('categories.*') ? 'submenu-active' : '' }}">
                     <iconify-icon icon="duo-icons:align-center" class="text-xl mr-2 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Categories</span>
                 </a>
