@@ -287,7 +287,7 @@
                 class="menu-item w-full flex items-center justify-between px-4 py-3 rounded-xl">
                 <div class="flex items-center">
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2"></iconify-icon>
-                    <span class="font-medium">Products</span>
+                    <span class="font-medium">Content</span>
                 </div>
                 <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform duration-300"
                     :class="open ? 'rotate-180' : ''"></iconify-icon>
@@ -304,7 +304,7 @@
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Blog</span>
                 </a>
-                <a href="{{ route('categories') }}"
+                <a href="{{ route('categories.index') }}"
                     class="submenu-item flex items-center px-4 py-2 rounded-lg transition-all duration-300">
                     <iconify-icon icon="duo-icons:align-center" class="text-xl mr-2 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Categories</span>
