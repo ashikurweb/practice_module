@@ -48,7 +48,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/users', [UsersController::class, 'index'])->name('users');
     });
 
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    // Replace the single route with a resource route for categories
+    Route::resource('categories', CategoryController::class);
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 

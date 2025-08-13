@@ -3,7 +3,7 @@ namespace App\Services;
 
 class IdleTimerService
 {
-    public static function generateScript(int $minutes = 2): string
+    public static function generateScript(int $minutes = 30): string
     {
         $milliseconds = $minutes * 60 * 1000;
         $lockUrl = route('lockscreen');

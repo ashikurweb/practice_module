@@ -54,16 +54,7 @@ class User extends Authenticatable
      */
     public function getInitials()
     {
-        $words = explode(' ', $this->name);
-        $initials = '';
-        
-        foreach ($words as $word) {
-            if (!empty($word)) {
-                $initials .= strtoupper($word[0]);
-            }
-        }
-        
-        return substr($initials, 0, 2);  
+        return get_initials($this->name);
     }
 
     public function blogs()

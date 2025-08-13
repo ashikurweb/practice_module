@@ -2,8 +2,8 @@
     <div class="space-y-6">
         <!-- Page Header -->
         <div>
-            <h1 class="text-3xl font-bold theme-text-primary">Edit Category</h1>
-            <p class="theme-text-secondary mt-2">Update an existing blog category</p>
+            <h1 class="text-3xl font-bold theme-text-primary">Create Category</h1>
+            <p class="theme-text-secondary mt-2">Add a new blog category to your website</p>
         </div>
 
         <!-- Main Container -->
@@ -15,9 +15,8 @@
             </div>
 
             <div class="p-6">
-                <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
                     
                     <!-- Name Field -->
                     <div class="mb-6">
@@ -25,7 +24,7 @@
                         <input type="text" 
                                id="name" 
                                name="name" 
-                               value="{{ old('name', $category->name) }}" 
+                               value="{{ old('name') }}" 
                                class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
                                placeholder="Enter category name" required>
                         @error('name')
@@ -45,10 +44,8 @@
                                 name="parent_id" 
                                 class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('parent_id') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary">
                             <option value="">None (Top Level Category)</option>
-                            @foreach($categories as $cat)
-                                @if($cat->id != $category->id)
-                                    <option value="{{ $cat->id }}" {{ old('parent_id', $category->parent_id) == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
-                                @endif
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('parent_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('parent_id')
@@ -67,7 +64,7 @@
                         <input type="text" 
                                id="slug" 
                                name="slug" 
-                               value="{{ old('slug', $category->slug) }}" 
+                               value="{{ old('slug') }}" 
                                class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('slug') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
                                placeholder="enter-category-slug" required>
                         @error('slug')
@@ -86,8 +83,8 @@
                         <select id="status" 
                                 name="status" 
                                 class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('status') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary">
-                            <option value="active" {{ old('status', $category->status) == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ old('status', $category->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
                         </select>
                         @error('status')
                             <p class="text-red-500 text-xs mt-2 flex items-center">
@@ -106,7 +103,7 @@
                                   name="short_content" 
                                   class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('short_content') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
                                   placeholder="Brief description of the category" 
-                                  rows="3">{{ old('short_content', $category->short_content) }}</textarea>
+                                  rows="3">{{ old('short_content') }}</textarea>
                         @error('short_content')
                             <p class="text-red-500 text-xs mt-2 flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -120,13 +117,6 @@
                     <!-- Image Field -->
                     <div class="mb-8">
                         <label for="image" class="block text-sm font-semibold theme-text-primary mb-2">Category Image</label>
-                        
-                        @if($category->image)
-                            <div class="mb-4">
-                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="w-40 h-40 object-cover rounded-lg border theme-border-primary">
-                            </div>
-                        @endif
-                        
                         <div class="mt-1 flex items-center">
                             <div class="w-full">
                                 <label class="flex flex-col items-center px-4 py-6 theme-bg-secondary theme-border-primary border border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200">
@@ -158,7 +148,7 @@
                         </a>
                         <button type="submit" class="px-6 py-3 text-white hover:opacity-80 border border-blue-400 bg-blue-600 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-sm">
                             <i class="fa-solid fa-save mr-2"></i>
-                            Update Category
+                            Create Category
                         </button>
                     </div>
                 </form>
