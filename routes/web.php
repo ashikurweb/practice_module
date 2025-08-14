@@ -27,16 +27,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionUserController::class, 'index'])->name('login');
     Route::post('/login', [SessionUserController::class, 'store'])->name('login.store');
 
-    // Forgot Password Route
     Route::get('/forgot', [PasswordResetController::class, 'index'])->name('forgot');
-
-    // Send Reset Link Route
     Route::post('/forgot', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
-
-    // Show Reset Password Form
     Route::get('/reset/{token}', [PasswordResetController::class, 'resetPassword'])->name('reset.password');
-
-    // Handle Reset Password Form Submission
     Route::post('/reset/{token}', [PasswordResetController::class, 'resetPasswordStore'])->name('reset.password.update');
 
 
@@ -58,6 +51,8 @@ Route::middleware('auth')->group(function () {
 
     // Replace the single route with a resource route for categories
     Route::resource('categories', CategoryController::class);
+    Route::post('categories/{category}/toggle-status', [CategoryController::class, 'toggleStatus'])
+        ->name('categories.toggle-status');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 

@@ -93,6 +93,19 @@ class CategoryController extends Controller
     }
 
     /**
+     * Toggle category status
+     */
+    public function toggleStatus(Category $category)
+    {
+        $category->update([
+            'status' => $category->status === 'active' ? 'inactive' : 'active'
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Category status updated successfully');
+    }
+
+    /**
      * Prepare category data for storage or update.
      */
     private function prepareCategoryData(Request $request, Category $category = null): array
