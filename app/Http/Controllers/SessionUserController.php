@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SessionUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\TokenExpirationService;
+use App\Http\Requests\SessionUserRequest;
 use Illuminate\Validation\ValidationException;
 
 class SessionUserController extends Controller
 {
+    protected $tokenExpirationService;
+
+    public function __construct(TokenExpirationService $tokenExpirationService)
+    {
+        $this->tokenExpirationService = $tokenExpirationService;
+    }
+
     /**
      * Show the login form.
      */
@@ -32,6 +40,8 @@ class SessionUserController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
+
+            $this->tokenExpirationService->setSessionExpiration(env('SESSION_EXPIRY_DAYS', 30));
 
             return redirect()->intended(route('home'))
                 ->with('success', 'Welcome back! You have been successfully logged in.');

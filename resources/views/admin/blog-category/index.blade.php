@@ -52,47 +52,6 @@
         .slider:hover {
             box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
         }
-
-        /* Remove custom status styles - using Tailwind only */
-
-        /* Action buttons */
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .btn-edit {
-            background-color: #dbeafe;
-            color: #2563eb;
-        }
-
-        .btn-edit:hover {
-            background-color: #bfdbfe;
-            color: #1d4ed8;
-        }
-
-        .btn-delete {
-            background-color: #fee2e2;
-            color: #dc2626;
-        }
-
-        .btn-delete:hover {
-            background-color: #fecaca;
-            color: #b91c1c;
-        }
     </style>
 
     {{-- Breadcumb --}}
@@ -193,36 +152,47 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center gap-3">
+                                <div class="flex items-center justify-start gap-3">
                                     {{-- Toggle Switch Form --}}
-                                    <form action="{{ route('categories.toggle-status', $category->id) }}" method="POST" class="inline-flex">
-                                        @csrf
-                                        <label class="toggle-switch cursor-pointer" title="Click to toggle status">
-                                            <input type="checkbox" 
-                                                   class="toggle-input"
-                                                   {{ $category->status == 'active' ? 'checked' : '' }}
-                                                   onchange="this.form.submit()">
-                                            <span class="slider"></span>
-                                        </label>
-                                    </form>
+                                    <div class="flex-shrink-0">
+                                        <form action="{{ route('categories.toggle-status', $category->id) }}" method="POST" class="inline-flex">
+                                            @csrf
+                                            <label class="toggle-switch cursor-pointer" title="Click to toggle status">
+                                                <input type="checkbox" 
+                                                       class="toggle-input"
+                                                       {{ $category->status == 'active' ? 'checked' : '' }}
+                                                       onchange="this.form.submit()">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </form>
+                                    </div>
                                     {{-- Status Text --}}
-                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium {{ $category->status == 'active' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700' }}">
-                                        {{ ucfirst($category->status) }}
-                                    </span>
+                                    <div class="flex-shrink-0">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $category->status == 'active' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700' }}">
+                                            {{ ucfirst($category->status) }}
+                                        </span>
+                                    </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-2">
                                     <a href="{{ route('categories.edit', $category->id) }}" 
-                                       class="action-btn btn-edit" 
+                                       class=" btn-edit" 
                                        title="Edit Category">
                                         <i class="fas fa-edit text-sm"></i>
                                     </a>
+                                    {{-- view category --}}
+                                    <a href="{{ route('categories.show', $category->id) }}" 
+                                       class="px-2 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 transition-color" 
+                                       title="View Category">
+                                        <i class="fas fa-eye text-sm"></i>
+                                    </a>
+                                    {{-- Delete Category --}}
                                     <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
-                                                class="action-btn btn-delete" 
+                                                class=" btn-delete" 
                                                 title="Delete Category"
                                                 onclick="return confirm('Are you sure you want to delete this category?')">
                                             <i class="fas fa-trash text-sm"></i>

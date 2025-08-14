@@ -34,20 +34,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        /* Loading spinner animation */
-    .spinner {
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top: 2px solid white;
-        width: 20px;
-        height: 20px;
-        animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
     </style>
 
     <div class="min-h-screen flex items-center justify-center p-4">
@@ -186,7 +172,7 @@
                             Processing...
                         </span>
                     </button>
-
+                    
                     <!-- Sign In Link -->
                     <div class="text-center mt-6">
                         <p class="text-sm text-gray-600">
@@ -261,7 +247,6 @@
                     btnLoading.classList.remove('hidden');
                     submitBtn.disabled = true;
                     
-                    // Re-submit the form after a brief delay to allow UI update
                     setTimeout(() => {
                         form.submit();
                     }, 100);
