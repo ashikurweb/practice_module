@@ -176,7 +176,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-2">
-                                    <a href="{{ route('categories.edit', $category->id) }}" 
+                                    <a href="{{ route('categories.edit', $category->slug) }}" 
                                        class=" btn-edit" 
                                        title="Edit Category">
                                         <i class="fas fa-edit text-sm"></i>

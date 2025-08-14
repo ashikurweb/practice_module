@@ -227,7 +227,7 @@
                 class="menu-item w-full flex items-center justify-between px-4 py-3 rounded-xl {{ request()->routeIs('blog.*', 'categories.*') ? 'active-menu' : '' }}">
                 <div class="flex items-center">
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2"></iconify-icon>
-                    <span class="font-medium">Products</span>
+                    <span class="font-medium">Content</span>
                 </div>
                 <iconify-icon icon="mdi:chevron-down" class="text-xl transition-transform duration-300"
                     :class="open ? 'rotate-180' : ''"></iconify-icon>

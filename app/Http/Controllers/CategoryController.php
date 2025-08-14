@@ -31,9 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.blog-category.create', [
-            'categories' => Category::all()
-        ]);
+        return view('admin.blog-category.create');
     }
 
     /**
@@ -63,8 +61,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         return view('admin.blog-category.edit', [
-            'category' => $category,
-            'categories' => Category::where('id', '!=', $category->id)->get()
+            'category' => $category
         ]);
     }
 
@@ -117,10 +114,11 @@ class CategoryController extends Controller
             if ($category) {
                 $this->imageService->deleteImage($category->image);
             }
-
+            
             $data['image'] = $this->imageService->storeImage($request->file('image'), 'categories');
         }
 
         return $data;
     }
+
 }

@@ -1,11 +1,5 @@
 <x-layouts.auth>
     <div class="space-y-6">
-        <!-- Page Header -->
-        <div>
-            <h1 class="text-3xl font-bold theme-text-primary">Create Category</h1>
-            <p class="theme-text-secondary mt-2">Add a new blog category to your website</p>
-        </div>
-
         <!-- Main Container -->
         <div class="theme-bg-card rounded-lg theme-shadow-lg theme-border-card border">
             <div class="px-6 py-4 theme-border-card border-b">
@@ -25,30 +19,9 @@
                                id="name" 
                                name="name" 
                                value="{{ old('name') }}" 
-                               class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
-                               placeholder="Enter category name" required>
+                               class="w-full pl-4 pr-4 py-3 theme-border-primary @error('name') border border-red-300 @enderror border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
+                               placeholder="Enter category name" >
                         @error('name')
-                            <p class="text-red-500 text-xs mt-2 flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                </svg>
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-
-                    <!-- Parent Category Field -->
-                    <div class="mb-6">
-                        <label for="parent_id" class="block text-sm font-semibold theme-text-primary mb-2">Parent Category</label>
-                        <select id="parent_id" 
-                                name="parent_id" 
-                                class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('parent_id') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary">
-                            <option value="">None (Top Level Category)</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('parent_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('parent_id')
                             <p class="text-red-500 text-xs mt-2 flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
@@ -66,7 +39,7 @@
                                name="slug" 
                                value="{{ old('slug') }}" 
                                class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('slug') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
-                               placeholder="enter-category-slug" required>
+                               placeholder="enter-category-slug" >
                         @error('slug')
                             <p class="text-red-500 text-xs mt-2 flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -156,3 +129,4 @@
         </div>
     </div>
 </x-layouts.auth>
+

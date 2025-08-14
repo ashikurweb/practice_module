@@ -15,7 +15,7 @@
             </div>
 
             <div class="p-6">
-                <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('categories.update', $category->slug) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     
@@ -38,38 +38,15 @@
                         @enderror
                     </div>
 
-                    <!-- Parent Category Field -->
-                    <div class="mb-6">
-                        <label for="parent_id" class="block text-sm font-semibold theme-text-primary mb-2">Parent Category</label>
-                        <select id="parent_id" 
-                                name="parent_id" 
-                                class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('parent_id') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary">
-                            <option value="">None (Top Level Category)</option>
-                            @foreach($categories as $cat)
-                                @if($cat->id != $category->id)
-                                    <option value="{{ $cat->id }}" {{ old('parent_id', $category->parent_id) == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('parent_id')
-                            <p class="text-red-500 text-xs mt-2 flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                                </svg>
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-
                     <!-- Slug Field -->
                     <div class="mb-6">
                         <label for="slug" class="block text-sm font-semibold theme-text-primary mb-2">Slug *</label>
                         <input type="text" 
-                               id="slug" 
-                               name="slug" 
-                               value="{{ old('slug', $category->slug) }}" 
-                               class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('slug') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
-                               placeholder="enter-category-slug" required>
+                            id="slug" 
+                            name="slug" 
+                            value="{{ old('slug', $category->slug) }}" 
+                            class="w-full pl-4 pr-4 py-3 theme-border-primary border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('slug') border-red-300 focus:ring-red-500 @enderror transition-all duration-200 theme-bg-secondary theme-text-primary"
+                            placeholder="enter-category-slug" required>
                         @error('slug')
                             <p class="text-red-500 text-xs mt-2 flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -79,6 +56,7 @@
                             </p>
                         @enderror
                     </div>
+
 
                     <!-- Status Field -->
                     <div class="mb-6">

@@ -23,8 +23,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name'          => 'required|string|max:255',
-            'parent_id'     => 'nullable|exists:categories,id',
-            'slug'          => 'nullable|string|unique:categories,slug,' . $this->category,
+            'slug'          => 'nullable|string|unique:categories,slug,' . $this->route('category')->id,
             'status'        => 'required|in:active,inactive',
             'short_content' => 'nullable|string|max:500',
             'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
