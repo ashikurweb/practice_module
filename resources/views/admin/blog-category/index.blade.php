@@ -95,10 +95,10 @@
                 <table class="min-w-full divide-y theme-border-card divide-y">
                     <thead class="theme-bg-secondary">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-16">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                                 ID
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-20">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                                 Image
                             </th>
                             <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
@@ -108,12 +108,9 @@
                                 Slug
                             </th>
                             <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
-                                Parent
-                            </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-32">
                                 Status
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-24">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                                 Actions
                             </th>
                         </tr>
@@ -142,20 +139,12 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm theme-text-primary">{{ $category->slug }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm theme-text-primary">
-                                    @if($category->parent)
-                                        {{ $category->parent->name }}
-                                    @else
-                                        <span class="text-gray-400">None</span>
-                                    @endif
-                                </div>
-                            </td>
+
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center justify-start gap-3">
                                     {{-- Toggle Switch Form --}}
                                     <div class="flex-shrink-0">
-                                        <form action="{{ route('categories.toggle-status', $category->id) }}" method="POST" class="inline-flex">
+                                        <form action="{{ route('categories.toggle-status', $category->slug) }}" method="POST" class="inline-flex">
                                             @csrf
                                             <label class="toggle-switch cursor-pointer" title="Click to toggle status">
                                                 <input type="checkbox" 
