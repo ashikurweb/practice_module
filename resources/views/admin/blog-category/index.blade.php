@@ -1,4 +1,100 @@
 <x-layouts.auth>
+    {{-- Toggle Switch CSS --}}
+    <style>
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .toggle-input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            transition: all 0.25s ease;
+            border-radius: 10px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.25s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .toggle-input:checked + .slider {
+            background-color: #10b981;
+        }
+
+        .toggle-input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .slider:hover {
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Remove custom status styles - using Tailwind only */
+
+        /* Action buttons */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn-edit {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+
+        .btn-edit:hover {
+            background-color: #bfdbfe;
+            color: #1d4ed8;
+        }
+
+        .btn-delete {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+
+        .btn-delete:hover {
+            background-color: #fecaca;
+            color: #b91c1c;
+        }
+    </style>
+
     {{-- Breadcumb --}}
     <x-breadcrumb :breadcrumbs="[
         ['label' => 'Settings', 'url' => route('admin.dashboard')],
@@ -40,10 +136,10 @@
                 <table class="min-w-full divide-y theme-border-card divide-y">
                     <thead class="theme-bg-secondary">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-16">
                                 ID
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-20">
                                 Image
                             </th>
                             <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
@@ -55,10 +151,10 @@
                             <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
                                 Parent
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-32">
                                 Status
                             </th>
-                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider">
+                            <th class="px-6 py-3 text-left text-xs font-medium theme-text-muted uppercase tracking-wider w-24">
                                 Actions
                             </th>
                         </tr>
@@ -67,7 +163,7 @@
                         @forelse($categories as $category)
                         <tr class="hover:theme-bg-secondary transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm theme-text-primary">{{ $category->id }}</div>
+                                <div class="text-sm theme-text-primary font-medium">{{ $category->id }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($category->image)
@@ -97,20 +193,39 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {{ $category->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                                    {{ ucfirst($category->status) }}
-                                </span>
+                                <div class="flex items-center gap-3">
+                                    {{-- Toggle Switch Form --}}
+                                    <form action="{{ route('categories.toggle-status', $category->id) }}" method="POST" class="inline-flex">
+                                        @csrf
+                                        <label class="toggle-switch cursor-pointer" title="Click to toggle status">
+                                            <input type="checkbox" 
+                                                   class="toggle-input"
+                                                   {{ $category->status == 'active' ? 'checked' : '' }}
+                                                   onchange="this.form.submit()">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </form>
+                                    {{-- Status Text --}}
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium {{ $category->status == 'active' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700' }}">
+                                        {{ ucfirst($category->status) }}
+                                    </span>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-2">
-                                    <a href="{{ route('categories.edit', $category->id) }}" class="text-blue-600 hover:text-blue-900">
-                                        <i class="fas fa-edit"></i>
+                                    <a href="{{ route('categories.edit', $category->id) }}" 
+                                       class="action-btn btn-edit" 
+                                       title="Edit Category">
+                                        <i class="fas fa-edit text-sm"></i>
                                     </a>
                                     <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure you want to delete this category?')">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" 
+                                                class="action-btn btn-delete" 
+                                                title="Delete Category"
+                                                onclick="return confirm('Are you sure you want to delete this category?')">
+                                            <i class="fas fa-trash text-sm"></i>
                                         </button>
                                     </form>
                                 </div>
