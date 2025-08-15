@@ -1,5 +1,5 @@
 <x-layouts.auth>
-    <div class="p-6 theme-bg-content min-h-screen">
+    <div class="p-6 min-h-screen">
         <!-- Header -->
         <div class="mb-8">
             <h1 class="text-3xl font-bold theme-text-primary">Profile Settings</h1>

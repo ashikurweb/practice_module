@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Auth\Events\PasswordReset;
@@ -53,6 +54,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::post('categories/{category}/toggle-status', [CategoryController::class, 'toggleStatus'])
         ->name('categories.toggle-status');
+
+    Route::resource('blogs', BlogController::class);
+    Route::post('blogs/{blog}/toggle-status', [BlogController::class, 'toggleStatus'])
+        ->name('blogs.toggle-status');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 

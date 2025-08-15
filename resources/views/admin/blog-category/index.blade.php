@@ -171,13 +171,13 @@
                                         <i class="fas fa-edit text-sm"></i>
                                     </a>
                                     {{-- view category --}}
-                                    <a href="{{ route('categories.show', $category->id) }}" 
+                                    <a href="{{ route('categories.show', $category->slug) }}" 
                                        class="px-2 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 transition-color" 
                                        title="View Category">
                                         <i class="fas fa-eye text-sm"></i>
                                     </a>
                                     {{-- Delete Category --}}
-                                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('categories.destroy', $category->slug) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 

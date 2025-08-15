@@ -239,7 +239,7 @@
                 x-transition:leave="transition ease-in duration-200"
                 x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
                 x-transition:leave-end="opacity-0 transform scale-95 translate-y-2" class="ml-4 mt-2 space-y-1">
-                <a href="#"
+                <a href="{{ route('blogs.index') }}"
                     class="submenu-item flex items-center px-4 py-2 rounded-lg {{ request()->routeIs('blog.*') ? 'submenu-active' : '' }}">
                     <iconify-icon icon="duo-icons:box" class="text-xl mr-2 opacity-60"></iconify-icon>
                     <span class="text-sm font-medium">Blog</span>
