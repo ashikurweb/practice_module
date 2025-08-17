@@ -1,0 +1,1 @@
+<i class="fa {{ $iconClass }} {{ $customClass ?? '' }} mr-2"></i>

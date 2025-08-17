@@ -159,19 +159,10 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" id="submitBtn"
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl text-sm font-medium text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200 shadow-lg">
-                        <span id="btnContent" class="flex items-center">
-                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
-                            </svg>
-                            Sign Up
-                        </span>
-                        <span id="btnLoading" class="hidden flex items-center">
-                            <div class="spinner mr-2"></div>
-                            Processing...
-                        </span>
-                    </button>
+                    <x-primary-button>
+                        <x-font-awesome iconClass="fa-regular fa-user" />
+                        Sign Up
+                    </x-primary-button>                   
                     
                     <!-- Sign In Link -->
                     <div class="text-center mt-6">
@@ -237,9 +228,7 @@
             const btnLoading = document.getElementById('btnLoading');
     
             form.addEventListener('submit', function(e) {
-                // Only show loading state if form is valid
                 if (form.checkValidity()) {
-                    // Prevent default submission temporarily
                     e.preventDefault();
                     
                     // Show loading state
