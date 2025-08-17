@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Services\ImageService;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -39,8 +38,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        // Prepare data before storing (slugs are generated automatically via the trait)
         $data = $this->prepareCategoryData($request);
 
+        // Create the category
         Category::create($data);
 
         return redirect()->route('categories.index')
@@ -50,27 +51,37 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
         return view('admin.blog-category.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        return view('admin.blog-category.edit', [
-            'category' => $category
-        ]);
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        return view('admin.blog-category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $request, $id)
     {
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        // Prepare the data before updating (slugs are generated automatically via the trait)
         $data = $this->prepareCategoryData($request, $category);
+
+        // Update the category
         $category->update($data);
 
         return redirect()->route('categories.index')
@@ -80,9 +91,15 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        // Delete the associated image if it exists
         $this->imageService->deleteImage($category->image);
+
+        // Delete the category
         $category->delete();
         
         return redirect()->route('categories.index')
@@ -92,8 +109,12 @@ class CategoryController extends Controller
     /**
      * Toggle category status
      */
-    public function toggleStatus(Category $category)
+    public function toggleStatus($id)
     {
+        // Find the category by ID
+        $category = Category::findOrFail($id);
+
+        // Toggle the category status
         $category->update([
             'status' => $category->status === 'active' ? 'inactive' : 'active'
         ]);
@@ -108,17 +129,18 @@ class CategoryController extends Controller
     private function prepareCategoryData(Request $request, Category $category = null): array
     {
         $data = $request->validated();
-        $data['slug'] = $data['slug'] ?: Str::slug($data['name']);
 
+        // Handle image upload if exists
         if ($request->hasFile('image')) {
             if ($category) {
+                // If updating, delete the old image
                 $this->imageService->deleteImage($category->image);
             }
             
+            // Store the new image and add it to the data
             $data['image'] = $this->imageService->storeImage($request->file('image'), 'categories');
         }
 
         return $data;
     }
-
 }

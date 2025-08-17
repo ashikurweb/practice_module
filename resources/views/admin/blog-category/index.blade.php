@@ -144,7 +144,7 @@
                                 <div class="flex items-center justify-start gap-3">
                                     {{-- Toggle Switch Form --}}
                                     <div class="flex-shrink-0">
-                                        <form action="{{ route('categories.toggle-status', $category->slug) }}" method="POST" class="inline-flex">
+                                        <form action="{{ route('categories.toggle-status', $category->id) }}" method="POST" class="inline-flex">
                                             @csrf
                                             <label class="toggle-switch cursor-pointer" title="Click to toggle status">
                                                 <input type="checkbox" 
@@ -165,19 +165,19 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-2">
-                                    <a href="{{ route('categories.edit', $category->slug) }}" 
+                                    <a href="{{ route('categories.edit', $category->id) }}" 
                                        class=" btn-edit" 
                                        title="Edit Category">
                                         <i class="fas fa-edit text-sm"></i>
                                     </a>
                                     {{-- view category --}}
-                                    <a href="{{ route('categories.show', $category->slug) }}" 
+                                    <a href="{{ route('categories.show', $category->id) }}" 
                                        class="px-2 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 transition-color" 
                                        title="View Category">
                                         <i class="fas fa-eye text-sm"></i>
                                     </a>
                                     {{-- Delete Category --}}
-                                    <form action="{{ route('categories.destroy', $category->slug) }}" method="POST" class="inline-block">
+                                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
